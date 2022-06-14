@@ -36,5 +36,4 @@ done
 
 printf "$titleformat" "Iniciando servidor ..."
 cd $base
-./venv_init.sh
 gunicorn -c gunicorn.config.py
