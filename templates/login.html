@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Iniciar Sesión {% endblock %}
+
+{% block style %}
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div class="box">
+    <h2>Iniciar Sesión</h2>
+    <form action="" method="post">
+      <div class="input-group">
+        <input type="text" name="user" placeholder="-" required>
+        <label for="user">Usuario</label>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" placeholder="-" required>
+        <label for="password">Contraseña</label>
+      </div>
+      <input type="submit" value="Iniciar Sesión">
+    </form>
+  </div>
+{% endblock %}
+
+{% block scripts %} {% endblock %}

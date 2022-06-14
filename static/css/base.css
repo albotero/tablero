@@ -1,1 +1,21 @@
+body {
+  background-color: rgb(67, 90, 134);
+}
 
+.box {
+  width: min(250px, 50%);
+  background-color: rgb(255, 255, 255);
+  color: rgb(7, 15, 33);
+  margin: 50px auto;
+  padding: 40px;
+  display: grid;
+  justify-content: center;
+  border: 1px gradient(rgb(206, 206, 206), rgb(175, 177, 180));
+  border-radius: 15px;
+  box-shadow: 5px 5px 15px rgb(136, 136, 136);
+}
+.box h2 {
+  color: rgb(22, 34, 85);
+  font-variant: small-caps;
+  margin-top: -5px;
+}

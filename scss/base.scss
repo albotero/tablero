@@ -1,0 +1,26 @@
+@import 'variables';
+
+body {
+    background-color: $color3;
+}
+
+.box {
+    width: min(250px, 50%);
+    background-color: $color1;
+    color: $color5;
+
+    margin: 50px auto;
+    padding: 40px;
+    display: grid;
+    justify-content: center;
+
+    border: 1px gradient(rgb(206, 206, 206), rgb(175, 177, 180));
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgb(136, 136, 136);
+
+    h2 {
+        color: $color4;
+        font-variant: small-caps;
+        margin-top: -5px;
+    }
+}

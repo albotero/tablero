@@ -1,0 +1,62 @@
+.box {
+  margin-top: 10%;
+}
+
+form {
+  display: grid;
+  justify-content: center;
+  font-family: Cambria;
+}
+form .input-group {
+  margin: 10px 0;
+  position: relative;
+}
+form .input-group input {
+  margin: 5px 0;
+  padding: 7px 10px;
+  z-index: 100;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  border-bottom: 1px solid rgb(22, 34, 85);
+  box-shadow: none !important;
+  font: inherit;
+}
+form .input-group input::placeholder {
+  opacity: 0;
+}
+form .input-group input:focus, form .input-group input:not(:placeholder-shown), form .input-group input:-webkit-autofill {
+  background-color: rgb(226, 226, 237);
+}
+form .input-group input:focus + label, form .input-group input:not(:placeholder-shown) + label, form .input-group input:-webkit-autofill + label {
+  transform: translate(6px, -14px) scale(0.8);
+  font-weight: bold;
+}
+form .input-group input:focus {
+  outline: 2px solid rgb(22, 34, 85);
+  outline-color: rgb(67, 90, 134);
+}
+form .input-group label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(10px, 13px);
+  transform-origin: left;
+  transition: transform 0.25s;
+  color: rgb(22, 34, 85);
+}
+form input[type=submit] {
+  padding: 5px 10px;
+  margin: 15px auto 0 auto;
+  width: 150px;
+  height: 35px;
+  border-radius: 10px;
+  background-color: rgb(226, 226, 237);
+}
+form input[type=submit]:hover {
+  background-color: rgb(186, 186, 195);
+}
+form input[type=submit]:active {
+  background-color: rgb(67, 90, 134);
+  color: rgb(255, 255, 255);
+}
