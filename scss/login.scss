@@ -1,9 +1,5 @@
 @import 'variables';
 
-.box {
-    margin-top: 10%;
-}
-
 form {
     display: grid;
     justify-content: center;
@@ -31,15 +27,14 @@ form {
             }
 
             &:focus, &:not(:placeholder-shown), &:-webkit-autofill {
-                background-color: $color2;
-
                 + label {
-                    transform: translate(6px, -14px) scale(.8);
+                    transform: translate(6px, -13px) scale(.8);
                     font-weight: bold;
                 }
             }
 
             &:focus {
+                background-color: $color2;
                 outline: 2px solid $color4;
                 outline-color: $color3;
             }
@@ -49,7 +44,7 @@ form {
             position: absolute;
             top: 0;
             left: 0;
-            transform: translate(10px, 13px);
+            transform: translate(10px, 15px);
             transform-origin: left;
             transition: transform .25s;
             color: $color4;
@@ -66,6 +61,7 @@ form {
 
         &:hover {
             background-color: $color2b;
+            cursor: pointer;
         }
 
         &:active {

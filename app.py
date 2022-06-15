@@ -17,6 +17,7 @@ def index():
     return render_template('index.html')
 
 def login_user(user, password):
+    session['user'] = 'user'
     result = 'ok'
     message = 'Se inició correctamente la sesión'
     return result, message

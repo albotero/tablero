@@ -7,6 +7,18 @@
 {% endblock %}
 
 {% block content %}
+  {% if result %}
+    {% if result[0] == 'ok' %}
+      <script type="text/javascript">
+        window.location.replace('{{ url_for(".index") }}');
+      </script>
+    {% endif %}
+    <div class="box box--{{ result[0] }}">
+      <h2>{{ result[0] | capitalize }}</h2>
+      <p>{{ result[1] }}</p>
+    </div>
+  {% endif %}
+
   <div class="box">
     <h2>Iniciar Sesión</h2>
     <form action="" method="post">

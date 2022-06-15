@@ -2,6 +2,7 @@
 
 body {
     background-color: $color3;
+    padding-top: 50px;
 }
 
 .box {
@@ -22,5 +23,10 @@ body {
         color: $color4;
         font-variant: small-caps;
         margin-top: -5px;
+    }
+
+    &.box--error > h2 {
+        color: $color-error;
+        + p { margin: -7px auto; }
     }
 }
