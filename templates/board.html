@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %} Tablero {% endblock %}
+
+{% block style %}
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/board.css') }}">
+{% endblock %}
+
+{% block content %}
+  {% if not location %}
+    <div class="locations">
+      <div onclick="window.location = `{{ url_for('board', location = 'surgery') }}`;">Quirófano</div>
+      <div onclick="window.location = `{{ url_for('board', location = 'surgery') }}`;">Quirófano</div>
+    </div>
+  {% else %}
+    <div class="board">
+      <div class="icon"></div>
+      <div class="title">Cirugía</div>
+      <div class="time">12:38:36 pm<br/>16 jun. 2022</div>
+      <div class="videos">Publicidad CV</div>
+      <div class="patients">
+        <!-- This generates automatically-->
+        <div class="patient">
+          <div class="--patient-rips">123123</div>
+          <div class="--patient-time">12:34 pm</div>
+          <div class="--patient-status --status-pacu">Recuperación</div>
+          <div class="--patient-detail">Se requiere al familiar</div>
+        </div>
+        <div class="patient">
+          <div class="--patient-rips">234234</div>
+          <div class="--patient-time">12:28 pm</div>
+          <div class="--patient-status --status-or">Ingresó a quirófano</div>
+        </div>
+        <div class="patient">
+          <div class="--patient-rips">345345</div>
+          <div class="--patient-time">12:26 pm</div>
+          <div class="--patient-status --status-exit">Salida</div>
+          <div class="--patient-detail"><strong>Destino:</strong> Hospitalización 3A - Habitación 302</div>
+        </div>
+        <div class="patient">
+          <div class="--patient-rips">123123</div>
+          <div class="--patient-time">12:34 pm</div>
+          <div class="--patient-status --status-pacu">Recuperación</div>
+          <div class="--patient-detail">Se requiere al familiar</div>
+        </div>
+        <div class="patient">
+          <div class="--patient-rips">234234</div>
+          <div class="--patient-time">12:28 pm</div>
+          <div class="--patient-status --status-or">Ingresó a quirófano</div>
+        </div>
+        <div class="patient">
+          <div class="--patient-rips">345345</div>
+          <div class="--patient-time">12:26 pm</div>
+          <div class="--patient-status --status-exit">Salida</div>
+          <div class="--patient-detail"><strong>Destino:</strong> Casa</div>
+        </div>
+        <div class="patient">
+          <div class="--patient-rips">345345</div>
+          <div class="--patient-time">12:26 pm</div>
+          <div class="--patient-status --status-exit">Salida</div>
+          <div class="--patient-detail"><strong>Destino:</strong> Casa</div>
+        </div>
+        <!---->
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %} {% endblock %}

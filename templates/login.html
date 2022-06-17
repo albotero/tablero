@@ -10,7 +10,7 @@
   {% if result %}
     {% if result[0] == 'ok' %}
       <script type="text/javascript">
-        window.location.replace('{{ url_for(".index") }}');
+        window.location.replace(`{{ url_for('.index') }}`);
       </script>
     {% endif %}
     <div class="box box--{{ result[0] }}">

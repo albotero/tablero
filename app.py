@@ -41,22 +41,20 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/board')
-def board():
+@app.route('/board/<location>')
+def board(location = None):
     # Requires logged user
     if not session.get('user'):
         return redirect(url_for('login'))
 
-    return render_template('board.html')
+    return render_template('board.html', location = location)
 
 @socketio.on('update_board')
 def update_board(data):
     try:
         # Load existing data
-        rips = data.get('rips')
-        time = data.get('time')
-        status = data.get('status')
-        detail = data.get('detail')
-
+        location = data.get('surgery')
+        # Returns a list of patient data class objects to render in board
         res = 'ok'
         emit('response', res)
     except Exception as ex:

@@ -1,0 +1,170 @@
+.locations {
+  width: min(750px, 70%);
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 50px 30px;
+  background-color: rgb(255, 255, 255);
+  display: grid;
+  justify-content: center;
+  gap: 50px 100px;
+  user-select: none;
+}
+.locations div {
+  width: 150px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: rgb(226, 226, 237);
+  padding: 10px 20px;
+  border: 1px solid rgb(67, 90, 134);
+  border-radius: 10px;
+}
+.locations div:hover {
+  background-color: rgb(186, 186, 195);
+  cursor: pointer;
+  border-color: rgb(22, 34, 85);
+}
+.locations div:active {
+  background-color: rgb(67, 90, 134);
+  color: rgb(255, 255, 255);
+  border-color: rgb(186, 186, 195);
+}
+
+.board {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 10px;
+  bottom: 10px;
+  padding: 10px 50px;
+  background-color: rgb(226, 226, 237);
+  user-select: none;
+  display: grid;
+  grid-template-columns: 25% 15% auto 200px;
+  grid-template-rows: 150px auto;
+  grid-template-areas: "icon title title time" "videos videos patients patients";
+  text-align: center;
+}
+.board div {
+  line-height: 150px !important;
+  color: rgb(22, 34, 85);
+}
+.board div div {
+  line-height: 100px !important;
+}
+.board .icon {
+  grid-area: icon;
+  content: "";
+  margin: 0 10px -2.5px 10px;
+  background-image: url("icon");
+  background-size: 100% 100%;
+  background-position: center;
+  background-color: darkgoldenrod;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+}
+.board .title {
+  grid-area: title;
+  font: bold small-caps 56px Georgia, serif;
+}
+.board .time {
+  grid-area: time;
+  padding: 45px 0;
+  font: bold 22px Georgia, sans;
+  line-height: 30px !important;
+}
+.board .videos {
+  grid-area: videos;
+  margin: 40px 15px 30px 15px;
+  background-color: blueviolet;
+  color: white;
+}
+.board .patients {
+  width: 95%;
+  margin: 0 auto;
+  grid-area: patients;
+  overflow-y: hidden;
+}
+.board .patients .patient {
+  display: grid;
+  grid-template-columns: min(350px, 30%) min(250px, 20%) auto;
+  grid-template-rows: auto auto;
+  grid-template-areas: "rips time status" "rips time detail";
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(186, 186, 195);
+  border-radius: 10px;
+  box-shadow: 4px 3px 10px rgb(67, 90, 134);
+  margin: 10px;
+}
+.board .patients .patient .--patient-rips {
+  grid-area: rips;
+  text-align: center;
+  font: bold 42px Georgia, serif;
+  color: rgb(22, 34, 85);
+}
+.board .patients .patient .--patient-rips::before {
+  content: "";
+  margin: 0 10px -2.5px 10px;
+  background-image: url("icon");
+  background-size: 36px 36px;
+  background-position: center;
+  background-color: darkgoldenrod;
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+}
+.board .patients .patient .--patient-time {
+  grid-area: time;
+  text-align: center;
+  font: bold 24px Georgia, sans;
+  color: rgb(67, 90, 134);
+}
+.board .patients .patient .--patient-status {
+  grid-area: status;
+  font: bold small-caps 28px Georgia, serif;
+  line-height: 50px !important;
+  text-align: center;
+}
+.board .patients .patient .--status-or::before {
+  content: "";
+  margin: 0 10px -2.5px 10px;
+  background-image: url("icon");
+  background-size: 25px 25px;
+  background-position: center;
+  background-color: darkgoldenrod;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
+.board .patients .patient .--status-pacu::before {
+  content: "";
+  margin: 0 10px -2.5px 10px;
+  background-image: url("icon");
+  background-size: 25px 25px;
+  background-position: center;
+  background-color: darkgoldenrod;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
+.board .patients .patient .--status-exit::before {
+  content: "";
+  margin: 0 10px -2.5px 10px;
+  background-image: url("icon");
+  background-size: 25px 25px;
+  background-position: center;
+  background-color: darkgoldenrod;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
+.board .patients .patient .--patient-detail {
+  grid-area: detail;
+  font: 18px Georgia, sans;
+  text-align: center;
+  line-height: 20px !important;
+}
