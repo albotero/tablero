@@ -50,6 +50,9 @@
     height: $height;
 }
 
+$num-patients: 7;
+$height-patient: 120px;
+
 .board {
     position: absolute;
     left: 10px;
@@ -70,7 +73,7 @@
     text-align: center;
 
     div {
-        line-height: 150px !important;
+        line-height: $height-patient !important;
         color: $color4;
 
         div { line-height: 100px !important; }
@@ -100,60 +103,107 @@
         background-color: blueviolet;
         color: white;
     }
+}
 
-    .patients {
-        width: 95%;
-        margin: 0 auto;
-        grid-area: patients;
-        overflow-y: hidden;
+@mixin white-gradient {
+	background: linear-gradient(to bottom,  rgba(226,226,237,1) 0%,rgba(226,226,237,0) 100%);
+}
 
-        .patient {
-            display: grid;
-            grid-template-columns: min(350px, 30%) min(250px, 20%) auto;
-            grid-template-rows: auto auto;
-            grid-template-areas:
-                "rips time status"
-                "rips time detail";
-            
-            background-color: $color1;
-            border: 2px solid $color2b;
-            border-radius: 10px;
-            box-shadow: 4px 3px 10px $color3;
-            margin: 10px;
+$animationSpeed: 25s;
+$num-patients: 7;
 
-            .--patient-rips {
-                grid-area: rips;
-                text-align: center;
-                font: bold 42px Georgia, serif;
-                color: $color4;
+// Animation
+@keyframes scroll {
+	0% { transform: translateY(0); }
+	100% { transform: translateY(calc(-50%))}
+}
 
-                &::before { @include icon('icon', 36px); }
-            }
+// Styling
+.patients {
+    width: 95%;
+    margin: 0 auto;
+    grid-area: patients;
+    overflow-y: hidden;
+    position: relative;
+	
+	.slider {
+        display: flex;
+        flex-direction: column;
+		animation: scroll $animationSpeed linear infinite;
+        height: calc($height-patient * ($num-patients * 2 + 1));
+	}
 
-            .--patient-time {
-                grid-area: time;
-                text-align: center;
-                font: bold 24px Georgia, sans;
-                color: $color3;
-            }
+    .track {
+        padding: 10px;
+        height: $height-patient;
+    }
 
-            .--patient-status {
-                grid-area: status;
-                font: bold small-caps 28px Georgia, serif;
-                line-height: 50px !important;
-                text-align: center;
-            }
-            
-            .--status-or::before { @include icon('icon'); }
-            .--status-pacu::before { @include icon('icon'); }
-            .--status-exit::before { @include icon('icon'); }
+    .patient {
+        display: grid;
+        grid-template-columns: min(350px, 30%) min(250px, 20%) auto;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "rips time status"
+            "rips time detail";
+        
+        background-color: $color1;
+        border: 2px solid $color2b;
+        border-radius: 10px;
+        box-shadow: 4px 3px 10px $color3;
 
-            .--patient-detail {
-                grid-area: detail;
-                font: 18px Georgia, sans;
-                text-align: center;
-                line-height: 20px !important;
-            }
+        .--patient-rips {
+            grid-area: rips;
+            text-align: center;
+            font: bold 42px Georgia, serif;
+            color: $color4;
+
+            &::before { @include icon('icon', 36px); }
+        }
+
+        .--patient-time {
+            grid-area: time;
+            text-align: center;
+            font: bold 24px Georgia, sans;
+            color: $color3;
+        }
+
+        .--patient-status {
+            grid-area: status;
+            font: bold small-caps 28px Georgia, serif;
+            line-height: 50px !important;
+            text-align: center;
+        }
+        
+        .--status-or::before { @include icon('icon'); }
+        .--status-pacu::before { @include icon('icon'); }
+        .--status-exit::before { @include icon('icon'); }
+
+        .--patient-detail {
+            grid-area: detail;
+            font: 18px Georgia, sans;
+            text-align: center;
+            line-height: 20px !important;
         }
     }
+
+	&::before,
+	&::after {
+		@include white-gradient;
+		content: "";
+		height: 25px;
+		position: absolute;
+		width: 100%;
+		z-index: 2;
+	}
+	
+	&::after {
+		left: 0;
+		bottom: 0;
+		transform: rotateZ(180deg);
+	}
+
+	&::before {
+		left: 0;
+		top: 0;
+	}
 }

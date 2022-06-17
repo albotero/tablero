@@ -19,48 +19,20 @@
       <div class="time">12:38:36 pm<br/>16 jun. 2022</div>
       <div class="videos">Publicidad CV</div>
       <div class="patients">
-        <!-- This generates automatically-->
-        <div class="patient">
-          <div class="--patient-rips">123123</div>
-          <div class="--patient-time">12:34 pm</div>
-          <div class="--patient-status --status-pacu">Recuperación</div>
-          <div class="--patient-detail">Se requiere al familiar</div>
+        <div class="slider">
+          <!-- This generates automatically-->
+          {% for i in range(14) %}
+            <div class="track">
+              <div class="patient">
+                <div class="--patient-rips">{{ i % 7 + 1 }}</div>
+                <div class="--patient-time">12:34 pm</div>
+                <div class="--patient-status --status-pacu">Recuperación</div>
+                <div class="--patient-detail">Se requiere al familiar</div>
+              </div>
+            </div>
+          {% endfor %}
+          <!---->
         </div>
-        <div class="patient">
-          <div class="--patient-rips">234234</div>
-          <div class="--patient-time">12:28 pm</div>
-          <div class="--patient-status --status-or">Ingresó a quirófano</div>
-        </div>
-        <div class="patient">
-          <div class="--patient-rips">345345</div>
-          <div class="--patient-time">12:26 pm</div>
-          <div class="--patient-status --status-exit">Salida</div>
-          <div class="--patient-detail"><strong>Destino:</strong> Hospitalización 3A - Habitación 302</div>
-        </div>
-        <div class="patient">
-          <div class="--patient-rips">123123</div>
-          <div class="--patient-time">12:34 pm</div>
-          <div class="--patient-status --status-pacu">Recuperación</div>
-          <div class="--patient-detail">Se requiere al familiar</div>
-        </div>
-        <div class="patient">
-          <div class="--patient-rips">234234</div>
-          <div class="--patient-time">12:28 pm</div>
-          <div class="--patient-status --status-or">Ingresó a quirófano</div>
-        </div>
-        <div class="patient">
-          <div class="--patient-rips">345345</div>
-          <div class="--patient-time">12:26 pm</div>
-          <div class="--patient-status --status-exit">Salida</div>
-          <div class="--patient-detail"><strong>Destino:</strong> Casa</div>
-        </div>
-        <div class="patient">
-          <div class="--patient-rips">345345</div>
-          <div class="--patient-time">12:26 pm</div>
-          <div class="--patient-status --status-exit">Salida</div>
-          <div class="--patient-detail"><strong>Destino:</strong> Casa</div>
-        </div>
-        <!---->
       </div>
     </div>
   {% endif %}
