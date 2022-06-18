@@ -84,30 +84,12 @@
   color: white;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
 .patients {
   width: 95%;
   margin: 0 auto;
   grid-area: patients;
   overflow-y: hidden;
   position: relative;
-}
-.patients .slider {
-  display: flex;
-  flex-direction: column;
-  animation: scroll 25s linear infinite;
-  height: 1800px;
-}
-.patients .track {
-  padding: 10px;
-  height: 120px;
 }
 .patients .patient {
   display: grid;
@@ -118,6 +100,7 @@
   border: 2px solid rgb(186, 186, 195);
   border-radius: 10px;
   box-shadow: 4px 3px 10px rgb(67, 90, 134);
+  margin: 5px 10px;
 }
 .patients .patient .--patient-rips {
   grid-area: rips;
@@ -187,7 +170,7 @@
   text-align: center;
   line-height: 20px !important;
 }
-.patients::before, .patients::after {
+.patients::after {
   background: linear-gradient(to bottom, rgb(226, 226, 237) 0%, rgba(226, 226, 237, 0) 100%);
   content: "";
   height: 25px;

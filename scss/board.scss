@@ -50,9 +50,6 @@
     height: $height;
 }
 
-$num-patients: 7;
-$height-patient: 120px;
-
 .board {
     position: absolute;
     left: 10px;
@@ -73,7 +70,7 @@ $height-patient: 120px;
     text-align: center;
 
     div {
-        line-height: $height-patient !important;
+        line-height: 120px !important;
         color: $color4;
 
         div { line-height: 100px !important; }
@@ -109,15 +106,6 @@ $height-patient: 120px;
 	background: linear-gradient(to bottom,  rgba(226,226,237,1) 0%,rgba(226,226,237,0) 100%);
 }
 
-$animationSpeed: 25s;
-$num-patients: 7;
-
-// Animation
-@keyframes scroll {
-	0% { transform: translateY(0); }
-	100% { transform: translateY(calc(-50%))}
-}
-
 // Styling
 .patients {
     width: 95%;
@@ -125,18 +113,6 @@ $num-patients: 7;
     grid-area: patients;
     overflow-y: hidden;
     position: relative;
-	
-	.slider {
-        display: flex;
-        flex-direction: column;
-		animation: scroll $animationSpeed linear infinite;
-        height: calc($height-patient * ($num-patients * 2 + 1));
-	}
-
-    .track {
-        padding: 10px;
-        height: $height-patient;
-    }
 
     .patient {
         display: grid;
@@ -150,6 +126,8 @@ $num-patients: 7;
         border: 2px solid $color2b;
         border-radius: 10px;
         box-shadow: 4px 3px 10px $color3;
+
+        margin: 5px 10px;
 
         .--patient-rips {
             grid-area: rips;
@@ -186,7 +164,7 @@ $num-patients: 7;
         }
     }
 
-	&::before,
+	//&::before,
 	&::after {
 		@include white-gradient;
 		content: "";
