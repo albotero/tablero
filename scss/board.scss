@@ -107,7 +107,7 @@
 }
 
 // Styling
-.patients {
+#patients {
     width: 95%;
     margin: 0 auto;
     grid-area: patients;
@@ -152,7 +152,7 @@
             text-align: center;
         }
         
-        .--status-or::before { @include icon('icon'); }
+        .--status-surgery::before { @include icon('icon'); }
         .--status-pacu::before { @include icon('icon'); }
         .--status-exit::before { @include icon('icon'); }
 

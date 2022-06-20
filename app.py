@@ -3,6 +3,8 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_socketio import SocketIO, emit
 
+from scripts.patients import ActivePatients
+
 app = Flask(__name__, instance_relative_config = True)
 app.secret_key = 'tablero'
 
@@ -49,16 +51,20 @@ def board(location = None):
 
     return render_template('board.html', location = location)
 
-@socketio.on('update_board')
-def update_board(data):
+@app.route('/update', methods=['POST'])
+def update():
+    res = 'ok -> message after mysql is updated'
+    active_patients(request.values['location'])
+    return res
+
+@socketio.on('active_patients')
+def active_patients(location):
     try:
-        # Load existing data
-        location = data.get('surgery')
-        # Returns a list of patient data class objects to render in board
-        res = 'ok'
-        emit('response', res)
+        # Emits active patients to render in board¡
+        emit(f'update-{location}', str(ActivePatients(location)))
     except Exception as ex:
-        emit('response', f'error >> {ex}')
+        # Log error
+        pass
 
 @app.route('/admin')
 def admin():

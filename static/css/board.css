@@ -84,14 +84,14 @@
   color: white;
 }
 
-.patients {
+#patients {
   width: 95%;
   margin: 0 auto;
   grid-area: patients;
   overflow-y: hidden;
   position: relative;
 }
-.patients .patient {
+#patients .patient {
   display: grid;
   grid-template-columns: min(350px, 30%) min(250px, 20%) auto;
   grid-template-rows: auto auto;
@@ -102,13 +102,13 @@
   box-shadow: 4px 3px 10px rgb(67, 90, 134);
   margin: 5px 10px;
 }
-.patients .patient .--patient-rips {
+#patients .patient .--patient-rips {
   grid-area: rips;
   text-align: center;
   font: bold 42px Georgia, serif;
   color: rgb(22, 34, 85);
 }
-.patients .patient .--patient-rips::before {
+#patients .patient .--patient-rips::before {
   content: "";
   margin: 0 10px -2.5px 10px;
   background-image: url("icon");
@@ -119,19 +119,19 @@
   width: 36px;
   height: 36px;
 }
-.patients .patient .--patient-time {
+#patients .patient .--patient-time {
   grid-area: time;
   text-align: center;
   font: bold 24px Georgia, sans;
   color: rgb(67, 90, 134);
 }
-.patients .patient .--patient-status {
+#patients .patient .--patient-status {
   grid-area: status;
   font: bold small-caps 28px Georgia, serif;
   line-height: 50px !important;
   text-align: center;
 }
-.patients .patient .--status-or::before {
+#patients .patient .--status-surgery::before {
   content: "";
   margin: 0 10px -2.5px 10px;
   background-image: url("icon");
@@ -142,7 +142,7 @@
   width: 25px;
   height: 25px;
 }
-.patients .patient .--status-pacu::before {
+#patients .patient .--status-pacu::before {
   content: "";
   margin: 0 10px -2.5px 10px;
   background-image: url("icon");
@@ -153,7 +153,7 @@
   width: 25px;
   height: 25px;
 }
-.patients .patient .--status-exit::before {
+#patients .patient .--status-exit::before {
   content: "";
   margin: 0 10px -2.5px 10px;
   background-image: url("icon");
@@ -164,13 +164,13 @@
   width: 25px;
   height: 25px;
 }
-.patients .patient .--patient-detail {
+#patients .patient .--patient-detail {
   grid-area: detail;
   font: 18px Georgia, sans;
   text-align: center;
   line-height: 20px !important;
 }
-.patients::after {
+#patients::after {
   background: linear-gradient(to bottom, rgb(226, 226, 237) 0%, rgba(226, 226, 237, 0) 100%);
   content: "";
   height: 25px;
@@ -178,12 +178,12 @@
   width: 100%;
   z-index: 2;
 }
-.patients::after {
+#patients::after {
   left: 0;
   bottom: 0;
   transform: rotateZ(180deg);
 }
-.patients::before {
+#patients::before {
   left: 0;
   top: 0;
 }

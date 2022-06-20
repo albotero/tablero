@@ -14,27 +14,17 @@
     </div>
   {% else %}
     <div class="board">
-      <div class="icon"></div>
+      <div class="icon">Logo CV</div>
       <div class="title">Cirugía</div>
       <div class="time"></div>
       <div class="videos">Publicidad CV</div>
-      <div class="patients">
-        <!-- This generates automatically-->
-        {% for i in range(8) %}
-          <div class="patient">
-            <div class="--patient-rips">{{ i + 1 }}</div>
-            <div class="--patient-time">12:34 pm</div>
-            <div class="--patient-status --status-pacu">Recuperación</div>
-            <div class="--patient-detail">Se requiere al familiar</div>
-          </div>
-        {% endfor %}
-        <!---->
-      </div>
+      <div id="patients"></div>
     </div>
   {% endif %}
 {% endblock %}
 
 {% block scripts %}
   <script src="{{ url_for('static', filename='js/socketio/socket.io.min.js') }}"></script>
+  <script type="text/javascript">const patientLocation = '{{ location if location else "" }}';</script>
   <script src="{{ url_for('static', filename='js/board.js') }}"></script>
 {% endblock %}
