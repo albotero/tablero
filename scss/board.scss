@@ -40,7 +40,7 @@
 
 @mixin icon($img, $width: 25px, $height: $width) {
     content: '';
-    margin: 0 7px -2.5px 7px;
+    margin: -1.3px 10px;
     background-image: url($img);
     background-size: $width $height;
     background-position: center;

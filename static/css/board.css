@@ -57,7 +57,7 @@
 .board .icon {
   grid-area: icon;
   content: "";
-  margin: 0 7px -2.5px 7px;
+  margin: -1.3px 10px;
   background-image: url("icon");
   background-size: 100% 100%;
   background-position: center;
@@ -115,7 +115,7 @@
 }
 #patients .patient .--patient-rips::before {
   content: "";
-  margin: 0 7px -2.5px 7px;
+  margin: -1.3px 10px;
   background-image: url("/static/svg/person.svg");
   background-size: 30px 30px;
   background-position: center;
@@ -153,7 +153,7 @@
 }
 #patients .patient.--surgery .--patient-status::before {
   content: "";
-  margin: 0 7px -2.5px 7px;
+  margin: -1.3px 10px;
   background-image: url("/static/svg/surgery.svg");
   background-size: 25px 25px;
   background-position: center;
@@ -168,7 +168,7 @@
 }
 #patients .patient.--pacu .--patient-status::before {
   content: "";
-  margin: 0 7px -2.5px 7px;
+  margin: -1.3px 10px;
   background-image: url("/static/svg/pacu.svg");
   background-size: 25px 25px;
   background-position: center;
@@ -183,7 +183,7 @@
 }
 #patients .patient.--exit .--patient-status::before {
   content: "";
-  margin: 0 7px -2.5px 7px;
+  margin: -1.3px 10px;
   background-image: url("/static/svg/exit.svg");
   background-size: 25px 25px;
   background-position: center;
