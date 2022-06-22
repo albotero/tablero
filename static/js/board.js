@@ -40,10 +40,10 @@ socket.on(`update-${patientLocation}`, function(data) {
         activePatients.push(patient['rips']);
 
         let html = `
-            <div class="patient" id="patient-${patient['rips']}">
+            <div class="patient --${patient['status']}" id="patient-${patient['rips']}">
                 <div class="--patient-rips">${patient['rips']}</div>
                 <div class="--patient-time">${patient['time']}</div>
-                <div class="--patient-status --status-${patient['status']}">${patient['status_str']}</div>
+                <div class="--patient-status">${patient['status_str']}</div>
                 <div class="--patient-detail">${patient['detail']}</div>
             </div>`;
     
@@ -55,8 +55,6 @@ socket.on(`update-${patientLocation}`, function(data) {
             $('#patients').append(html);
         }
     }
-
-    console.log(activePatients);
 
     // Delete outdated patients
     for (let patient in $('#patients').children()) {

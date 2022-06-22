@@ -44,10 +44,10 @@
     background-image: url($img);
     background-size: $width $height;
     background-position: center;
-    background-color: darkgoldenrod;
     display: inline-block;
     width: $width;
     height: $height;
+    filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
 }
 
 .board {
@@ -135,7 +135,7 @@
             font: bold 42px Georgia, serif;
             color: $color4;
 
-            &::before { @include icon('icon', 36px); }
+            &::before { @include icon('/static/svg/person.svg', 36px); }
         }
 
         .--patient-time {
@@ -151,16 +151,39 @@
             line-height: 50px !important;
             text-align: center;
         }
-        
-        .--status-surgery::before { @include icon('icon'); }
-        .--status-pacu::before { @include icon('icon'); }
-        .--status-exit::before { @include icon('icon'); }
 
         .--patient-detail {
             grid-area: detail;
             font: 18px Georgia, sans;
             text-align: center;
             line-height: 20px !important;
+
+            .--destino::before {
+                font-weight: bold;
+                content: 'Destino: ';
+            }
+
+            .--detail-familiar::before {
+                color: red;
+                font-weight: bold;
+                content: 'Se requiere al familiar';
+            }
+        }
+
+        &.--surgery {
+            background-color: $color-surgery;
+            box-shadow: 4px 3px 10px $color-surgery;
+            .--patient-status::before { @include icon('/static/svg/surgery.svg'); }
+        }
+        &.--pacu {
+            background-color: $color-pacu;
+            box-shadow: 4px 3px 10px $color-pacu;
+            .--patient-status::before { @include icon('/static/svg/pacu.svg'); }
+        }
+        &.--exit {
+            background-color: $color-exit;
+            box-shadow: 4px 3px 10px $color-exit;
+            .--patient-status::before { @include icon('/static/svg/exit.svg'); }
         }
     }
 
