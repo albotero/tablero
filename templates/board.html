@@ -10,12 +10,11 @@
   {% if not location %}
     <div class="locations">
       <div onclick="window.location = `{{ url_for('board', location = 'surgery') }}`;">Quirófano</div>
-      <div onclick="window.location = `{{ url_for('board', location = 'surgery') }}`;">Quirófano</div>
     </div>
   {% else %}
     <div class="board">
-      <div class="icon">Logo CV</div>
-      <div class="title">Cirugía</div>
+      <div class="icon"></div>
+      <div class="title">{{ location_str }}</div>
       <div class="time"></div>
       <div class="videos">Publicidad CV</div>
       <div id="patients"></div>

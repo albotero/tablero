@@ -49,12 +49,22 @@ def board(location = None):
     if not session.get('user'):
         return redirect(url_for('login'))
 
-    return render_template('board.html', location = location)
+    location_str = {
+        'surgery': 'Cirugía'
+    }
+
+    return render_template('board.html',
+        location = location,
+        location_str = location_str.get(location))
 
 @app.route('/update', methods=['POST'])
 def update():
     res = 'ok -> message after mysql is updated'
-    active_patients(request.values['location'])
+
+    if res == 'ok':
+        # Emit changes
+        active_patients(request.values.get('location'))
+
     return res
 
 @socketio.on('active_patients')
