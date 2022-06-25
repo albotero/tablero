@@ -49,13 +49,9 @@ def board(location = None):
     if not session.get('user'):
         return redirect(url_for('login'))
 
-    location_str = {
-        'surgery': 'Cirugía'
-    }
-
     return render_template('board.html',
         location = location,
-        location_str = location_str.get(location))
+        ActivePatients = ActivePatients)
 
 @app.route('/update', methods=['POST'])
 def update():
@@ -70,7 +66,7 @@ def update():
 @socketio.on('active_patients')
 def active_patients(location):
     try:
-        # Emits active patients to render in board¡
+        # Emits active patients to render in board
         emit(f'update-{location}', str(ActivePatients(location)))
     except Exception as ex:
         # Log error

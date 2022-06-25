@@ -40,13 +40,13 @@ socket.on(`update-${patientLocation}`, function(data) {
     let activePatients = [];
 
     // Add new data to the list
-    for (let patient of data['patients']) {
-        activePatients.push(patient['rips']);
+    for (let patient of data) {
+        activePatients.push(patient['rips'] + '');
 
         let html = `
             <div class="--patient-rips">${patient['rips']}</div>
             <div class="--patient-time">${patient['time']}</div>
-            <div class="--patient-status">${patient['status_str']}</div>
+            <div class="--patient-status">${patientStatus[patient['status']]}</div>
             <div class="--patient-detail">${patient['detail']}</div>`;
     
         if ($(`#patient-${patient['rips']}`).length) {
@@ -55,7 +55,7 @@ socket.on(`update-${patientLocation}`, function(data) {
         } else {
             // If doesn't exist, appends it to list
             html = `<div class="patient --${patient['status']}" id="patient-${patient['rips']}">${html}</div>`;
-            $('#patients').append(html);
+            $('#patients').hide().append(html).slideDown(1000);
         }
     }
 

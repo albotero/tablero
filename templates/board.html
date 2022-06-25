@@ -9,12 +9,14 @@
 {% block content %}
   {% if not location %}
     <div class="locations">
-      <div onclick="window.location = `{{ url_for('board', location = 'surgery') }}`;">Quirófano</div>
+      {% for key, vals in ActivePatients.locations.items() %}
+        <div onclick="window.location = `{{ url_for('board', location = key) }}`;">{{ vals['title'] }}</div>
+      {% endfor %}
     </div>
   {% else %}
     <div class="board">
       <div class="icon"></div>
-      <div class="title">{{ location_str }}</div>
+      <div class="title">{{ ActivePatients.locations[location]['title'] }}</div>
       <div class="time"></div>
       <div class="videos">Publicidad CV</div>
       <div id="patients"></div>
@@ -23,7 +25,12 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="{{ url_for('static', filename='js/socketio/socket.io.min.js') }}"></script>
-  <script type="text/javascript">const patientLocation = '{{ location if location else "" }}';</script>
-  <script src="{{ url_for('static', filename='js/board.js') }}"></script>
+  {% if location %}
+    <script src="{{ url_for('static', filename='js/socketio/socket.io.min.js') }}"></script>
+    <script type="text/javascript">
+      const patientLocation = '{{ location if location else "" }}';
+      const patientStatus = {{ ActivePatients.locations[location]['status'] | safe }};
+    </script>
+    <script src="{{ url_for('static', filename='js/board.js') }}"></script>
+  {% endif %}
 {% endblock %}

@@ -9,11 +9,12 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS board (
-  `eventid` int primary key,
+  `eventid` int primary key auto_increment,
+  `location` text,
   `rips` int,
   `time` timestamp,
-  `event` timestamp,
-  `detail` timestamp,
-  `user` timestamp
+  `status` text,
+  `detail` text,
+  `user` int
 );
 
