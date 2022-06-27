@@ -36,8 +36,8 @@ class DB_Table:
     def __init__(self, table):
         self.table = table
 
-    def collapse(self, dict):
-        return ', '.join([ f'`{key}`="{value}"' for key, value in dict.items() ])
+    def collapse(self, dict, union = ' AND'):
+        return f'{union} '.join([ f'{key} "{value}"' for key, value in dict.items() ])
 
     def execute(self, command):
         return QueryResult(command)
@@ -64,7 +64,7 @@ class DB_Table:
     def update(self, data: dict, conditions: dict):
         command = f'''
             UPDATE `{self.table}`
-            SET {self.collapse(data)}
+            SET {self.collapse(data, ",")}
             WHERE {self.collapse(conditions)};
             '''
         return QueryResult(command)

@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta
 from scripts.database import DB_Table
 
 class ActivePatients:
@@ -7,6 +8,7 @@ class ActivePatients:
         'surgery': {
             'title': 'Cirugía',
             'status': {
+                'preqx': 'Preparación',
                 'surgery': 'Cirugía',
                 'pacu': 'Recuperación',
                 'exit': 'Salida'
@@ -15,8 +17,16 @@ class ActivePatients:
     }
 
     def __init__(self, location):
-        patients = DB_Table('board').get({'location': location})
-        patients = [] if patients.__error__ else patients.fetch
+        active = DB_Table('board').get({
+            '`location` =': location,
+            '`status` <>': 'exit'
+            }).fetch
+        exit = DB_Table('board').get({
+            '`location` =': location,
+            '`status` =': 'exit',
+            '`time` >=': (datetime.now() - timedelta(hours=0, minutes=30)).strftime('%Y-%m-%d %H:%M:%S')
+            }).fetch
+        patients = (active if active else []) + (exit if exit else [])
         
         self.data = {
             'location': location,

@@ -52,6 +52,8 @@ socket.on(`update-${patientLocation}`, function(data) {
         if ($(`#patient-${patient['rips']}`).length) {
             // If patient already exists, updates its data
             $(`#patient-${patient['rips']}`).html(html);
+            // Update status class
+            $(`#patient-${patient['rips']}`).attr('class', `patient --${patient['status']}`)
         } else {
             // If doesn't exist, appends it to list
             html = `<div class="patient --${patient['status']}" id="patient-${patient['rips']}">${html}</div>`;

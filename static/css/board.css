@@ -147,9 +147,24 @@
   font-weight: bold;
   content: "Se requiere al familiar";
 }
+#patients .patient.--preqx {
+  background-color: rgb(186, 237, 244);
+  box-shadow: 4px 3px 10px rgb(186, 237, 244);
+}
+#patients .patient.--preqx .--patient-status::before {
+  content: "";
+  margin: -1.3px 10px;
+  background-image: url("/static/svg/preqx.svg");
+  background-size: 25px 25px;
+  background-position: center;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
+}
 #patients .patient.--surgery {
-  background-color: rgb(248, 221, 236);
-  box-shadow: 4px 3px 10px rgb(248, 221, 236);
+  background-color: rgb(251, 210, 233);
+  box-shadow: 4px 3px 10px rgb(251, 210, 233);
 }
 #patients .patient.--surgery .--patient-status::before {
   content: "";
@@ -163,8 +178,8 @@
   filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
 }
 #patients .patient.--pacu {
-  background-color: rgb(253, 247, 219);
-  box-shadow: 4px 3px 10px rgb(253, 247, 219);
+  background-color: rgb(243, 233, 189);
+  box-shadow: 4px 3px 10px rgb(243, 233, 189);
 }
 #patients .patient.--pacu .--patient-status::before {
   content: "";
@@ -178,8 +193,8 @@
   filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
 }
 #patients .patient.--exit {
-  background-color: rgb(224, 249, 224);
-  box-shadow: 4px 3px 10px rgb(224, 249, 224);
+  background-color: rgb(183, 255, 183);
+  box-shadow: 4px 3px 10px rgb(183, 255, 183);
 }
 #patients .patient.--exit .--patient-status::before {
   content: "";

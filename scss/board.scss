@@ -172,6 +172,11 @@ $title-height: 125px;
             }
         }
 
+        &.--preqx {
+            background-color: $color-preqx;
+            box-shadow: 4px 3px 10px $color-preqx;
+            .--patient-status::before { @include icon('/static/svg/preqx.svg'); }
+        }
         &.--surgery {
             background-color: $color-surgery;
             box-shadow: 4px 3px 10px $color-surgery;
