@@ -5,66 +5,6 @@ form {
     justify-content: center;
     font-family: Cambria;
 
-    .--patient-status .input-group:first-child {
-        display: none;
-        margin-bottom: 25px;
-    }
-
-    .input-group {
-        margin: 10px 0;
-        position: relative;
-
-        input, select, div:first-child {
-            margin: 5px 0;
-            padding: 7px 10px;
-            z-index: 100;
-    
-            outline: none;
-            border: none;
-            border-radius: 4px;
-            border-bottom: 1px solid $color4;
-            box-shadow: none !important;
-
-            font: inherit;
-
-            &::placeholder {
-                opacity: 0;
-            }
-
-            &:focus, &:not(:placeholder-shown), &:-webkit-autofill {
-                + label {
-                    transform: translate(6px, -13px) scale(.8);
-                    font-weight: bold;
-                }
-            }
-
-            &:focus {
-                background-color: $color2;
-                outline: 2px solid $color4;
-                outline-color: $color3;
-            }
-        }
-
-        label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform: translate(10px, 15px);
-            transform-origin: left;
-            transition: transform .25s;
-            color: $color4;
-        }
-
-        &:nth-child(3) input:focus,
-        &:nth-child(3) input:not(:placeholder-shown) {
-            margin-top: 15px;
-
-            + label {
-                transform: translate(6px, -4px) scale(.8);
-            }
-        }
-    }
-
     input[type=submit] {
         padding: 5px 10px;
         margin: 15px auto 0 auto;
@@ -82,5 +22,52 @@ form {
             background-color: $color3;
             color: $color1;
         }
+    }
+}
+
+.input-group {
+    margin: 10px 0;
+    position: relative;
+    font-family: Cambria;
+
+    input {
+        margin: 5px 0;
+        padding: 7px 10px;
+        z-index: 100;
+
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        border-bottom: 1px solid $color4;
+        box-shadow: none !important;
+
+        font: inherit;
+
+        &::placeholder {
+            opacity: 0;
+        }
+
+        &:focus, &:not(:placeholder-shown), &:-webkit-autofill {
+            + label {
+                transform: translate(6px, -13px) scale(.8);
+                font-weight: bold;
+            }
+        }
+
+        &:focus {
+            background-color: $color2;
+            outline: 2px solid $color4;
+            outline-color: $color3;
+        }
+    }
+
+    label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(10px, 15px);
+        transform-origin: left;
+        transition: transform .25s;
+        color: $color4;
     }
 }

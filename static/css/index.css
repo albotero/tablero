@@ -106,24 +106,27 @@
   padding: 3px 7px;
   border-radius: 10px;
 }
-.filter input:not(:placeholder-shown) + .clear::before {
+.filter input:not(:placeholder-shown) ~ .clear {
   display: block;
 }
-.filter .clear::before {
-  content: "x";
-  width: 15px;
-  height: 15px;
+.filter .clear {
+  width: 16px;
+  height: 16px;
   position: absolute;
   right: 7.5px;
-  top: 10px;
-  line-height: 20px;
+  top: 14px;
   border: solid 1px rgb(224, 222, 222);
   border-radius: 50%;
   background-color: rgb(234, 231, 231);
-  color: rgb(155, 151, 151);
-  font: 13px Arial, Helvetica, sans-serif;
-  text-align: center;
   user-select: none;
   cursor: pointer;
   display: none;
+}
+.filter .clear div {
+  margin: 4px;
+  font: 7px Arial, Helvetica, sans-serif;
+}
+.filter .clear:hover {
+  background-color: rgb(223, 220, 220);
+  border-color: rgb(168, 168, 168);
 }

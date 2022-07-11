@@ -3,6 +3,7 @@
 {% block title %} Tablero - Registrar Evento {% endblock %}
 
 {% block style %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/login.css') }}">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
@@ -17,9 +18,12 @@
     {% else %}
         <div class="box">
             <h2>Pacientes Ingresados En {{ ActivePatients.locations[location]['title'] }}</h2>
-            <div class="filter">
-                <input type="text" class="filter" placeholder="RIPS" id="filter">
-                <div class="clear" onclick="$('#filter').val(''); socket.emit('filter-patients', [patientLocation, null]);"></div>
+            <div class="input-group filter">
+                <input type="text" placeholder="-" id="filter">
+                <label for="filter">RIPS</label>
+                <div class="clear" onclick="$('#filter').val(''); socket.emit('filter-patients', [patientLocation, null]);">
+                    <div>&#x274C;</div>
+                </div>
             </div>
             <div class="summary">
                 <div>
