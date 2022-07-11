@@ -17,19 +17,9 @@ def index(location = None):
     if not session.get('user'):
         return redirect(url_for('login'))
 
-    res = None
-
-    if request.method == 'POST':    
-        res = 'ok -> message after mysql is updated'
-        
-        if res == 'ok':
-            # Emit changes
-            active_patients(request.values.get('location'))
-
     return render_template('index.html',
         location = location,
-        ActivePatients = ActivePatients,
-        res=res)
+        ActivePatients = ActivePatients)
 
 def login_user(user, password):
     session['user'] = 'user'
@@ -65,7 +55,7 @@ def board(location):
         location = location,
         ActivePatients = ActivePatients)
 
-@socketio.on('active_patients')
+@socketio.on('active-patients')
 def active_patients(location):
     try:
         # Emits active patients to render in board
@@ -73,6 +63,24 @@ def active_patients(location):
     except Exception as ex:
         # Log error
         pass
+
+@socketio.on('filter-patients')
+def filter_patients(data):
+    try:
+        # If no patient is filtered, return all active patients
+        if not data[1]:
+            active_patients(data[0])
+            return
+        
+        # Return filtered patients
+        emit(f"filtered-{data[0]}", str(ActivePatients(location=data[0], filter=data[1])))
+    except Exception as ex:
+        # Log error
+        pass
+
+@socketio.on('update-rips')
+def update_rips(data):
+    pass
 
 @app.route('/admin')
 def admin():

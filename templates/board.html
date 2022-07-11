@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Tablero {% endblock %}
+{% block title %} Tablero {{ ActivePatients.locations[location]['title'] }} {% endblock %}
 
 {% block style %}
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/board.css') }}">
@@ -19,10 +19,7 @@
 {% block scripts %}
   {% if location %}
     <script src="{{ url_for('static', filename='js/socketio/socket.io.min.js') }}"></script>
-    <script type="text/javascript">
-      const patientLocation = '{{ location if location else "" }}';
-      const patientStatus = {{ ActivePatients.locations[location]['status'] | safe }};
-    </script>
+    <script type="text/javascript">const patientLocation = '{{ location if location else "" }}';</script>
     <script src="{{ url_for('static', filename='js/board.js') }}"></script>
   {% endif %}
 {% endblock %}

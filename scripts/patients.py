@@ -16,11 +16,14 @@ class ActivePatients:
         }
     }
 
-    def __init__(self, location):
-        active = DB_Table('board').get({
+    def __init__(self, location, filter = None):
+        query = {
             '`location` =': location,
             '`status` <>': 'exit'
-            }).fetch
+            }
+        if filter:
+            query['`rips` ='] = filter
+        active = DB_Table('board').get(query).fetch
         exit = DB_Table('board').get({
             '`location` =': location,
             '`status` =': 'exit',
@@ -34,27 +37,10 @@ class ActivePatients:
         }
     
     def __str__(self):
+        location = self.locations[self.data['location']]
         patients = self.data['patients']
         for p in patients:
+            p['status_index'] = list(location['status']).index(p['status'])
+            p['status'] = location['title']
             p['time'] = p['time'].strftime('%-I:%M %p')
         return json.dumps(patients)
-
-
-'''
-[
-    {'rips': '123123', 'time': '12:34 pm', 'status': 'surgery', 'detail': ''},
-    {'rips': '234234', 'time': '12:35 pm', 'status': 'surgery', 'detail': '<a class="--detail-familiar"></a>'},
-    {'rips': '345345', 'time': '12:36 pm', 'status': 'exit', 'detail': '<a class="--destination">Casa</a>'},
-    {'rips': '456456', 'time': '12:37 pm', 'status': 'exit', 'detail': '<a class="--destination">Hospitalización 3A - Habitación 201</a>'},
-    {'rips': '567567', 'time': '12:38 pm', 'status': 'pacu', 'detail': '<a class="--detail-familiar"></a>'},
-    {'rips': '678678', 'time': '12:39 pm', 'status': 'pacu', 'detail': ''},
-    {'rips': '789789', 'time': '12:40 pm', 'status': 'surgery', 'detail': ''},
-    {'rips': '890890', 'time': '12:41 pm', 'status': 'surgery', 'detail': '<a class="--detail-familiar"></a>'},
-    {'rips': '901901', 'time': '12:42 pm', 'status': 'surgery', 'detail': ''},
-    {'rips': '012012', 'time': '12:43 pm', 'status': 'exit', 'detail': '<a class="--destination">UCI - Cama 14</a>'},
-    {'rips': '321321', 'time': '12:44 pm', 'status': 'pacu', 'detail': ''},
-    {'rips': '432432', 'time': '12:45 pm', 'status': 'surgery', 'detail': ''},
-    {'rips': '543543', 'time': '12:46 pm', 'status': 'surgery', 'detail': '<a class="--detail-familiar"></a>'},
-    {'rips': '654654', 'time': '12:47 pm', 'status': 'pacu', 'detail': '<a class="--detail-familiar"></a>'}
-]
-'''

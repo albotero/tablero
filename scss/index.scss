@@ -10,7 +10,7 @@
 
     > div {
         display: grid;
-        grid-template-columns: 30% 35% 35%;
+        grid-template-columns: 20% auto 35%;
         grid-auto-rows: min-content;
         grid-template-areas:
             "rips estado acciones";
@@ -47,15 +47,19 @@
                     filter: none;
                 }
 
-                div::before {
+                div {
                     user-select: none;
                     cursor: pointer;
-                    margin: 0;
+                    &::before { margin: 0; }
                 }
 
                 .disabled::before {
                     filter: invert(60%);
                     cursor: default;
+                }
+
+                div:not(.disabled):hover::before {
+                    filter: invert(15%) drop-shadow(0 0 10px rgb(91, 228, 255));
                 }
             }
 

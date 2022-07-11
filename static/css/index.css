@@ -8,7 +8,7 @@
 }
 .summary > div {
   display: grid;
-  grid-template-columns: 30% 35% 35%;
+  grid-template-columns: 20% auto 35%;
   grid-auto-rows: min-content;
   grid-template-areas: "rips estado acciones";
 }
@@ -75,14 +75,19 @@
   filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
   filter: none;
 }
-.summary > div:not(:first-child) > :nth-child(3) div::before {
+.summary > div:not(:first-child) > :nth-child(3) div {
   user-select: none;
   cursor: pointer;
+}
+.summary > div:not(:first-child) > :nth-child(3) div::before {
   margin: 0;
 }
 .summary > div:not(:first-child) > :nth-child(3) .disabled::before {
   filter: invert(60%);
   cursor: default;
+}
+.summary > div:not(:first-child) > :nth-child(3) div:not(.disabled):hover::before {
+  filter: invert(15%) drop-shadow(0 0 10px rgb(91, 228, 255));
 }
 .summary > div:not(:first-child):hover {
   background-color: rgb(186, 186, 195);
