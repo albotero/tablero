@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %} Tablero - Registrar Evento {% endblock %}
+
+{% block style %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+    {% if not location in ActivePatients.locations.keys() %}
+        <div class="box locations">
+            <h2>Elegir Servicio</h2>
+            {% for key, vals in ActivePatients.locations.items() %}
+                <div onclick="window.location = `{{ url_for('.index', location = key) }}`;">{{ vals['title'] }}</div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="box">
+            <h2>Pacientes Ingresados En {{ ActivePatients.locations[location]['title'] }}</h2>
+            <div class="filter">
+                <input type="text" class="filter" placeholder="RIPS" id="filter">
+                <div class="clear" onclick="$('#filter').val('');"></div>
+            </div>
+            <div class="summary">
+                <div>
+                    <div>RIPS</div>
+                    <div>Estado actual</div>
+                    <div>Acciones</div>
+                </div>
+                <div>
+                    <div>123123</div>
+                    <div>Cirugía</div>
+                    <div>
+                        <div class="familiar"></div>
+                        <div class="surgery disabled"></div>
+                        <div class="pacu"></div>
+                        <div class="exit"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>Actualizar Paciente</h2>
+            <form action="" method="post">
+                <div class="input-group">
+                    <input type="text" name="rips" placeholder="-" onchange="showStatus(this.value);" required>
+                    <label for="rips">Paciente (rips)</label>
+                </div>
+                <div class="--patient-status">
+                    <div class="input-group">
+                        <div></div>
+                        <label>Estado actual</label>
+                    </div>
+
+                    <div class="input-group">
+                        <select type="text" name="status" placeholder="-" required>
+                            <option hidden value="">Seleccione una opción&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                            <option value="preqx">Prequirúrgica</option>
+                            <option value="surgery">Cirugía</option>
+                            <option value="pacu">Recuperación</option>
+                            <option value="exit">Salida</option>
+                        </select>
+                        <label for="status">Nuevo Estado</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="detail" placeholder="-">
+                        <label for="detail">Detalle / Observaciones</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="familiar" id="familiar">
+                        <label for="familiar">Se requiere al familiar</label>
+                    </div>
+                    <input type="submit" value="Guardar Datos">
+                </div>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

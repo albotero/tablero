@@ -11,12 +11,25 @@ app.secret_key = 'tablero'
 socketio = SocketIO(app, cors_allowed_origins = '*', async_mode='gevent') #, logger=True, engineio_logger=True)
 
 @app.route('/')
-def index():
+@app.route('/<location>')
+def index(location = None):
     # Requires logged user
     if not session.get('user'):
         return redirect(url_for('login'))
 
-    return render_template('index.html')
+    res = None
+
+    if request.method == 'POST':    
+        res = 'ok -> message after mysql is updated'
+        
+        if res == 'ok':
+            # Emit changes
+            active_patients(request.values.get('location'))
+
+    return render_template('index.html',
+        location = location,
+        ActivePatients = ActivePatients,
+        res=res)
 
 def login_user(user, password):
     session['user'] = 'user'
@@ -42,9 +55,8 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-@app.route('/board')
-@app.route('/board/<location>')
-def board(location = None):
+@app.route('/<location>/board')
+def board(location):
     # Requires logged user
     if not session.get('user'):
         return redirect(url_for('login'))
@@ -52,16 +64,6 @@ def board(location = None):
     return render_template('board.html',
         location = location,
         ActivePatients = ActivePatients)
-
-@app.route('/update', methods=['POST'])
-def update():
-    res = 'ok -> message after mysql is updated'
-
-    if res == 'ok':
-        # Emit changes
-        active_patients(request.values.get('location'))
-
-    return res
 
 @socketio.on('active_patients')
 def active_patients(location):

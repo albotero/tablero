@@ -1,0 +1,124 @@
+.box {
+  width: min(750px, 70%);
+}
+
+.summary {
+  width: 600px;
+  font-size: large;
+}
+.summary > div {
+  display: grid;
+  grid-template-columns: 30% 35% 35%;
+  grid-auto-rows: min-content;
+  grid-template-areas: "rips estado acciones";
+}
+.summary > div > div {
+  border: solid 1px rgb(186, 186, 195);
+  margin: -1px -1px 0 0;
+  padding: 10px 5px;
+  text-align: center;
+}
+.summary > div:first-child {
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  background-color: rgb(67, 90, 134);
+}
+.summary > div:not(:first-child):first-child {
+  font-weight: bold;
+}
+.summary > div:not(:first-child) > :nth-child(3) {
+  display: flex;
+  justify-content: center;
+}
+.summary > div:not(:first-child) > :nth-child(3) .surgery::before {
+  content: "";
+  margin: -1.3px 10px;
+  background-image: url("/static/svg/surgery.svg");
+  background-size: 25px 25px;
+  background-position: center;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
+}
+.summary > div:not(:first-child) > :nth-child(3) .pacu::before {
+  content: "";
+  margin: -1.3px 10px;
+  background-image: url("/static/svg/pacu.svg");
+  background-size: 25px 25px;
+  background-position: center;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
+}
+.summary > div:not(:first-child) > :nth-child(3) .exit::before {
+  content: "";
+  margin: -1.3px 10px;
+  background-image: url("/static/svg/exit.svg");
+  background-size: 25px 25px;
+  background-position: center;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
+}
+.summary > div:not(:first-child) > :nth-child(3) .familiar::before {
+  content: "";
+  margin: -1.3px 10px;
+  background-image: url("/static/svg/familiar.svg");
+  background-size: 25px 25px;
+  background-position: center;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
+  filter: none;
+}
+.summary > div:not(:first-child) > :nth-child(3) div::before {
+  user-select: none;
+  cursor: pointer;
+  margin: 0;
+}
+.summary > div:not(:first-child) > :nth-child(3) .disabled::before {
+  filter: invert(60%);
+  cursor: default;
+}
+.summary > div:not(:first-child):hover {
+  background-color: rgb(186, 186, 195);
+}
+.summary > div:not(:first-child):hover > div {
+  border: solid 1px rgb(226, 226, 237);
+}
+
+.filter {
+  position: relative;
+  margin: 0 auto 10px auto;
+}
+.filter input {
+  width: 200px;
+  line-height: 30px;
+  padding: 3px 7px;
+  border-radius: 10px;
+}
+.filter input:not(:placeholder-shown) + .clear::before {
+  display: block;
+}
+.filter .clear::before {
+  content: "x";
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 7.5px;
+  top: 10px;
+  line-height: 20px;
+  border: solid 1px rgb(224, 222, 222);
+  border-radius: 50%;
+  background-color: rgb(234, 231, 231);
+  color: rgb(155, 151, 151);
+  font: 13px Arial, Helvetica, sans-serif;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  display: none;
+}

@@ -1,0 +1,101 @@
+@import 'variables';
+
+.box {
+    width: min(750px, 70%);
+}
+
+.summary {
+    width: 600px;
+    font-size: large;
+
+    > div {
+        display: grid;
+        grid-template-columns: 30% 35% 35%;
+        grid-auto-rows: min-content;
+        grid-template-areas:
+            "rips estado acciones";
+
+        > div {
+            border: solid 1px $color2b;
+            margin: -1px -1px 0 0;
+            padding: 10px 5px;
+            text-align: center;
+        }
+
+        // Titles
+        &:first-child {
+            font-weight: bold;
+            color: $color1;
+            background-color: $color3;
+        }
+
+        // Rows
+        &:not(:first-child){
+            // RIPS
+            &:first-child { font-weight: bold; }
+
+            // Actions
+            > :nth-child(3) {
+                display: flex;
+                justify-content: center;
+
+                .surgery::before { @include icon('/static/svg/surgery.svg'); }
+                .pacu::before { @include icon('/static/svg/pacu.svg'); }
+                .exit::before { @include icon('/static/svg/exit.svg'); }
+                .familiar::before {
+                    @include icon('/static/svg/familiar.svg');
+                    filter: none;
+                }
+
+                div::before {
+                    user-select: none;
+                    cursor: pointer;
+                    margin: 0;
+                }
+
+                .disabled::before {
+                    filter: invert(60%);
+                    cursor: default;
+                }
+            }
+
+            &:hover {
+                background-color: $color2b;
+                > div {  border: solid 1px $color2; }
+            }
+        }
+    }
+}
+
+.filter {
+    position: relative;
+    margin: 0 auto 10px auto;
+
+    input {
+        width: 200px;
+        line-height: 30px;
+        padding: 3px 7px;
+        border-radius: 10px;
+
+        &:not(:placeholder-shown) + .clear::before{ display: block; }
+    }
+
+    .clear::before {
+        content: 'x';
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        right: 7.5px;
+        top: 10px;
+        line-height: 20px;
+        border: solid 1px rgb(224, 222, 222);
+        border-radius: 50%;
+        background-color: rgb(234, 231, 231);
+        color: rgb(155, 151, 151);
+        font: 13px Arial, Helvetica, sans-serif;
+        text-align: center;
+        user-select: none;
+        cursor: pointer;
+        display: none;
+    }
+}

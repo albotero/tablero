@@ -1,55 +1,5 @@
 @import 'variables';
 
-.locations {
-    width: min(750px, 70%);
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    padding: 50px 30px;
-    background-color: $color1;
-    display: grid;
-    justify-content: center;
-    gap: 50px 100px;
-    user-select: none;
-
-    div {
-        width: 150px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        background-color: $color2;
-        padding: 10px 20px;
-        border: 1px solid $color3;
-        border-radius: 10px;
-
-        &:hover {
-            background-color: $color2b;
-            cursor: pointer;
-            border-color: $color4;
-        }
-
-        &:active {
-            background-color: $color3;
-            color: $color1;
-            border-color: $color2b;
-        }
-    }
-}
-
-@mixin icon($img, $width: 25px, $height: $width) {
-    content: '';
-    margin: -1.3px 10px;
-    background-image: url($img);
-    background-size: $width $height;
-    background-position: center;
-    display: inline-block;
-    width: $width;
-    height: $height;
-    filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
-}
-
 $title-height: 125px;
 
 .board {
@@ -59,6 +9,7 @@ $title-height: 125px;
     top: 10px;
     bottom: 10px;
     padding: 10px 50px;
+    border-radius: 15px;
     background-color: $color2;
     user-select: none;
 

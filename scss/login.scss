@@ -5,11 +5,16 @@ form {
     justify-content: center;
     font-family: Cambria;
 
+    .--patient-status .input-group:first-child {
+        display: none;
+        margin-bottom: 25px;
+    }
+
     .input-group {
         margin: 10px 0;
         position: relative;
 
-        input {
+        input, select, div:first-child {
             margin: 5px 0;
             padding: 7px 10px;
             z-index: 100;
@@ -48,6 +53,15 @@ form {
             transform-origin: left;
             transition: transform .25s;
             color: $color4;
+        }
+
+        &:nth-child(3) input:focus,
+        &:nth-child(3) input:not(:placeholder-shown) {
+            margin-top: 15px;
+
+            + label {
+                transform: translate(6px, -4px) scale(.8);
+            }
         }
     }
 

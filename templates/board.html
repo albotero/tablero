@@ -7,13 +7,6 @@
 {% endblock %}
 
 {% block content %}
-  {% if not location %}
-    <div class="locations">
-      {% for key, vals in ActivePatients.locations.items() %}
-        <div onclick="window.location = `{{ url_for('board', location = key) }}`;">{{ vals['title'] }}</div>
-      {% endfor %}
-    </div>
-  {% else %}
     <div class="board">
       <div class="icon"></div>
       <div class="title">{{ ActivePatients.locations[location]['title'] }}</div>
@@ -21,7 +14,6 @@
       <div class="videos">Publicidad CV</div>
       <div id="patients"></div>
     </div>
-  {% endif %}
 {% endblock %}
 
 {% block scripts %}
