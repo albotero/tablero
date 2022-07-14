@@ -9,14 +9,15 @@ class ActivePatients:
             'title': 'Cirugía',
             'status': {
                 'preqx': 'Preparación',
-                'surgery': 'Cirugía',
+                'surgery': 'Entró a Cirugía',
                 'pacu': 'Recuperación',
                 'exit': 'Salida'
             }
         }
     }
 
-    def __init__(self, location, filter = None):        
+    def __init__(self, location, filter = None):
+        time_30min = (datetime.now() - timedelta(hours=0, minutes=30)).strftime('%Y-%m-%d %H:%M:%S')
         query = f'''
             SELECT *
             FROM `board`
@@ -28,21 +29,14 @@ class ActivePatients:
             ON last_updates.id = board.eventid
             WHERE
                 `location`='{location}'
-                {f"AND `rips`='{filter}'" if filter else ""};
+                AND `status`!='exit'
+                OR (`status`='exit' AND `time` >='{time_30min}')
+                {f"AND `rips`='{filter}'" if filter else ""}
+            ORDER BY `time` DESC;
             '''
-        
-        active = DB_Table('board').execute(query).fetch
-        exit = DB_Table('board').get({
-            '`location` =': location,
-            '`status` =': 'exit',
-            '`time` >=': (datetime.now() - timedelta(hours=0, minutes=30)).strftime('%Y-%m-%d %H:%M:%S')
-            }).fetch
-        
-        patients = (active if active else []) + (exit if exit else [])
-        
         self.data = {
             'location': location,
-            'patients': patients
+            'patients': DB_Table('board').execute(query).fetch
         }
     
     def __str__(self):
@@ -50,6 +44,6 @@ class ActivePatients:
         patients = self.data['patients']
         for p in patients:
             p['status_index'] = list(location['status']).index(p['status'])
-            p['status'] = location['title']
-            p['time'] = p['time'].strftime('%-I:%M %p')
+            p['status_str'] = location['status'][p['status']]
+            p['time'] = p['time'].strftime('%-I:%M %p').lower()
         return json.dumps(patients)

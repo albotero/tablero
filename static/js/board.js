@@ -40,24 +40,31 @@ socket.on(`update-${patientLocation}`, function(data) {
     let activePatients = [];
 
     // Add new data to the list
-    for (let patient of data) {
+    for (let patient of data.reverse()) {
         activePatients.push(patient['rips'] + '');
 
         let html = `
             <div class="--patient-rips">${patient['rips']}</div>
             <div class="--patient-time">${patient['time']}</div>
-            <div class="--patient-status">${patient['status']}</div>
+            <div class="--patient-status">${patient['status_str']}</div>
             <div class="--patient-detail">${patient['detail']}</div>`;
-    
-        if ($(`#patient-${patient['rips']}`).length) {
+        
+        let item = `#patient-${patient['rips']}`;
+        if ($(item).length) {
             // If patient already exists, updates its data
-            $(`#patient-${patient['rips']}`).html(html);
-            // Update status class
-            $(`#patient-${patient['rips']}`).attr('class', `patient --${patient['status']}`)
+            if ($(item).html() != html) {
+                $(item).slideUp(1000, () =>
+                    $(item).html(html)
+                        .attr('class', `patient --${patient['status']}`)
+                        .prependTo('#patients')
+                        .slideDown(1000)
+                );
+            }
         } else {
-            // If doesn't exist, appends it to list
+            // If doesn't exist, adds it to list
             html = `<div class="patient --${patient['status']}" id="patient-${patient['rips']}">${html}</div>`;
-            $('#patients').hide().append(html).slideDown(1000);
+            $('#patients').prepend(html);
+            $(item).hide().slideDown(1000);
         }
     }
 

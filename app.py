@@ -95,7 +95,8 @@ def update_rips(data):
         'user': session['user']
     })
     # Update changes on Board
-    emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=data['rips'])))
+    filter = None if data.get('noupdate') else data['rips']
+    emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=filter)))
 
 @app.route('/admin')
 def admin():

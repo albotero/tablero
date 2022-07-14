@@ -1,5 +1,12 @@
 var socket = io();
 
+var update_status = (rips, status) => socket.emit('update-rips', {
+    'location': patientLocation,
+    'rips': rips,
+    'status': status,
+    'noupdate': true
+});;
+
 function populate_table(data) {
     // Clear list
     $('.summary').children().not(':first').remove();
@@ -12,14 +19,14 @@ function populate_table(data) {
             <div>
                 <div>${patient['rips']}</div>
                 <div>
-                    <div class="detail">${patient['status']}</div>
+                    <div class="detail">${patient['time']} &#10137; ${patient['status_str']}</div>
                     <div class="detail">${patient['detail']}</div>
                 </div>
                 <div>
-                    <div class="familiar"></div>
-                    <div class="surgery${patient['status_index'] > 0 ? ' disabled' : ''}"></div>
-                    <div class="pacu${patient['status_index'] > 1 ? ' disabled' : ''}"></div>
-                    <div class="exit${patient['status_index'] > 2 ? ' disabled' : ''}"></div>
+                    <div class="familiar" onclick="update_status(${patient['rips']}, 'familiar');"></div>
+                    <div class="surgery${patient['status_index'] > 0 ? ' disabled' : ` " onclick="update_status(${patient['rips']}, 'surgery');`}"></div>
+                    <div class="pacu${patient['status_index'] > 1 ? ' disabled' : ` " onclick="update_status(${patient['rips']}, 'pacu');`}"></div>
+                    <div class="exit${patient['status_index'] > 2 ? ' disabled' : ` " onclick="update_status(${patient['rips']}, 'exit');`}"></div>
                 </div>
             </div>`;
         
