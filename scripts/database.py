@@ -53,7 +53,7 @@ class DB_Table:
 
     def add(self, data: dict):
         columns = ', '.join([ f'`{col}`' for col in data.keys() ])
-        values = ', '.join([ f'`{col}`' for col in data.values() ])
+        values = ', '.join([ f"'{col}'" for col in data.values() ])
         command = f'''
             INSERT INTO `{self.table}`
             ({columns})

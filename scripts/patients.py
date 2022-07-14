@@ -16,19 +16,28 @@ class ActivePatients:
         }
     }
 
-    def __init__(self, location, filter = None):
-        query = {
-            '`location` =': location,
-            '`status` <>': 'exit'
-            }
-        if filter:
-            query['`rips` ='] = filter
-        active = DB_Table('board').get(query).fetch
+    def __init__(self, location, filter = None):        
+        query = f'''
+            SELECT *
+            FROM `board`
+            INNER JOIN (
+                SELECT MAX(eventid) as id
+                FROM `board`
+                GROUP BY `rips`
+            ) last_updates
+            ON last_updates.id = board.eventid
+            WHERE
+                `location`='{location}'
+                {f"AND `rips`='{filter}'" if filter else ""};
+            '''
+        
+        active = DB_Table('board').execute(query).fetch
         exit = DB_Table('board').get({
             '`location` =': location,
             '`status` =': 'exit',
             '`time` >=': (datetime.now() - timedelta(hours=0, minutes=30)).strftime('%Y-%m-%d %H:%M:%S')
             }).fetch
+        
         patients = (active if active else []) + (exit if exit else [])
         
         self.data = {

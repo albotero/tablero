@@ -5,7 +5,9 @@ function populate_table(data) {
     $('.summary').children().not(':first').remove();
 
     // Add new data to the list
+    let activePatients = []
     for (let patient of JSON.parse(data)) {
+        activePatients.push(patient['rips']);
         let html = `
             <div>
                 <div>${patient['rips']}</div>
@@ -22,6 +24,20 @@ function populate_table(data) {
             </div>`;
         
         $('.summary').append(html);
+    }
+
+    // If the RIPS provided is not found, asks for registration
+    let rips = parseInt($('#filter').val());
+    if (rips && !activePatients.includes(rips)) {
+        $.confirm('Ingresar Nuevo Paciente',
+            `<p>
+                El paciente con RIPS
+                <span style="font-style: italic; font-weight: bold;">${$('#filter').val()}</span>
+                no se encuentra ingresado.
+            </p>
+            <p>¿Desea ingresarlo ahora?</p>`,
+            'Ingresar Paciente', 'Cancelar',
+            () => socket.emit('update-rips', { 'location': patientLocation, 'rips': rips }));
     }
 }
 

@@ -4,6 +4,9 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from flask_socketio import SocketIO, emit
 
 from scripts.patients import ActivePatients
+from scripts.database import DB_Table
+
+from datetime import datetime
 
 app = Flask(__name__, instance_relative_config = True)
 app.secret_key = 'tablero'
@@ -22,7 +25,7 @@ def index(location = None):
         ActivePatients = ActivePatients)
 
 def login_user(user, password):
-    session['user'] = 'user'
+    session['user'] = 1
     result = 'ok'
     message = 'Se inició correctamente la sesión'
     return result, message
@@ -80,7 +83,19 @@ def filter_patients(data):
 
 @socketio.on('update-rips')
 def update_rips(data):
-    pass
+    # Default status for new patients
+    default_status = list(ActivePatients.locations[data['location']]['status'])[0]
+    # Write to DB
+    DB_Table('board').add({
+        'location': data['location'],
+        'rips': data['rips'],
+        'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'status': data.get('status', default_status),
+        'detail': data.get('detail', ''),
+        'user': session['user']
+    })
+    # Update changes on Board
+    emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=data['rips'])))
 
 @app.route('/admin')
 def admin():
