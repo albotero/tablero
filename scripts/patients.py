@@ -45,5 +45,6 @@ class ActivePatients:
         for p in patients:
             p['status_index'] = list(location['status']).index(p['status'])
             p['status_str'] = location['status'][p['status']]
-            p['time'] = p['time'].strftime('%-I:%M %p').lower()
+            p['time_str'] = p['time'].strftime('%-I:%M %p').lower()
+            p['time'] = p['time'].strftime('%Y-%m-%d %H:%M:%S').lower()
         return json.dumps(patients)

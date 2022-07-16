@@ -61,11 +61,12 @@ class DB_Table:
             '''
         return QueryResult(command)
 
-    def update(self, data: dict, conditions: dict):
+    def update(self, data: dict, conditions: dict, optional: str):
         command = f'''
             UPDATE `{self.table}`
             SET {self.collapse(data, ",")}
-            WHERE {self.collapse(conditions)};
+            WHERE {self.collapse(conditions)}
+            {optional};
             '''
         return QueryResult(command)
 

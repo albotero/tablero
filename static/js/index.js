@@ -1,11 +1,14 @@
 var socket = io();
 
-var update_status = (rips, status) => socket.emit('update-rips', {
+var update_status = ({rips, status, detail = '', familiar = false, time = null}) => socket.emit('update-rips', {
     'location': patientLocation,
     'rips': rips,
+    'time': time,
     'status': status,
+    'detail': detail,
+    'familiar': familiar,
     'noupdate': true
-});;
+});
 
 function populate_table(data) {
     // Clear list
@@ -19,14 +22,14 @@ function populate_table(data) {
             <div>
                 <div>${patient['rips']}</div>
                 <div>
-                    <div class="detail">${patient['time']} &#10137; ${patient['status_str']}</div>
+                    <div class="detail">${patient['time_str']} &#10137; ${patient['status_str']}</div>
                     <div class="detail">${patient['detail']}</div>
                 </div>
                 <div>
-                    <div class="familiar" onclick="update_status(${patient['rips']}, 'familiar');"></div>
-                    <div class="surgery${patient['status_index'] > 0 ? ' disabled' : ` " onclick="update_status(${patient['rips']}, 'surgery');`}"></div>
-                    <div class="pacu${patient['status_index'] > 1 ? ' disabled' : ` " onclick="update_status(${patient['rips']}, 'pacu');`}"></div>
-                    <div class="exit${patient['status_index'] > 2 ? ' disabled' : ` " onclick="update_status(${patient['rips']}, 'exit');`}"></div>
+                    <div class="familiar" onclick="update_status({rips: ${patient['rips']}, status: '${patient['status']}', time: '${patient['time']}', familiar: !${patient['familiar']}});"></div>
+                    <div class="surgery${patient['status_index'] > 0 ? ' disabled' : ` " onclick="update_status({rips: ${patient['rips']}, status: 'surgery'});`}"></div>
+                    <div class="pacu${patient['status_index'] > 1 ? ' disabled' : ` " onclick="update_status({rips: ${patient['rips']}, status: 'pacu'});`}"></div>
+                    <div class="exit${patient['status_index'] > 2 ? ' disabled' : ` " onclick="update_status({rips: ${patient['rips']}, status: 'exit', time: '${patient['time']}', detail: '${patient['detail']}'});`}"></div>
                 </div>
             </div>`;
         

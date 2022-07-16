@@ -105,13 +105,15 @@
   margin: 0;
   line-height: 24px !important;
 }
-#patients .patient .--patient-detail .--destination::before {
+#patients .patient .--patient-detail .--detail-destination::before {
   font-weight: bold;
   content: "Destino: ";
 }
-#patients .patient .--patient-detail .--detail-familiar::before {
+#patients .patient .--patient-detail.--detail-familiar {
   color: red;
   font-weight: bold;
+}
+#patients .patient .--patient-detail.--detail-familiar::before {
   content: "Se requiere al familiar";
 }
 #patients .patient.--preqx {

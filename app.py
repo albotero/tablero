@@ -83,19 +83,32 @@ def filter_patients(data):
 
 @socketio.on('update-rips')
 def update_rips(data):
+    filter = None if data.get('noupdate') else data['rips']
+
+    # Add familiar call
+    if data.get('familiar'):
+        DB_Table('board').update(
+            data={'`familiar` =': 1 if data['familiar'] else 0},
+            conditions={'`rips` =': data['rips']},
+            optional='ORDER BY `eventid` DESC LIMIT 1'
+        )
+        emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=filter)))
+        return
+
     # Default status for new patients
     default_status = list(ActivePatients.locations[data['location']]['status'])[0]
+
     # Write to DB
     DB_Table('board').add({
         'location': data['location'],
         'rips': data['rips'],
-        'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'time': data['time'] if data.get('time') else datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'status': data.get('status', default_status),
         'detail': data.get('detail', ''),
         'user': session['user']
     })
+
     # Update changes on Board
-    filter = None if data.get('noupdate') else data['rips']
     emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=filter)))
 
 @app.route('/admin')
