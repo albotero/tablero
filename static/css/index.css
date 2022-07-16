@@ -63,10 +63,10 @@
   height: 25px;
   filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
 }
-.summary > div:not(:first-child) > :nth-child(3) .familiar::before {
+.summary > div:not(:first-child) > :nth-child(3) .relative::before {
   content: "";
   margin: -1.3px 10px;
-  background-image: url("/static/svg/familiar.svg");
+  background-image: url("/static/svg/relative.svg");
   background-size: 25px 25px;
   background-position: center;
   display: inline-block;
@@ -74,6 +74,9 @@
   height: 25px;
   filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
   filter: none;
+}
+.summary > div:not(:first-child) > :nth-child(3) .relative.green {
+  filter: hue-rotate(120deg) brightness(175%);
 }
 .summary > div:not(:first-child) > :nth-child(3) div {
   user-select: none;

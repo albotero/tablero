@@ -109,11 +109,11 @@
   font-weight: bold;
   content: "Destino: ";
 }
-#patients .patient .--patient-detail.--detail-familiar {
-  color: red;
+#patients .patient .--patient-detail.--detail-relative {
+  color: rgb(255, 0, 0);
   font-weight: bold;
 }
-#patients .patient .--patient-detail.--detail-familiar::before {
+#patients .patient .--patient-detail.--detail-relative::before {
   content: "Se requiere al familiar";
 }
 #patients .patient.--preqx {

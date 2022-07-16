@@ -1,12 +1,12 @@
 var socket = io();
 
-var update_status = ({rips, status, detail = '', familiar = false, time = null}) => socket.emit('update-rips', {
+var update_status = ({rips, status, detail = '', relative = false, time = null}) => socket.emit('update-rips', {
     'location': patientLocation,
     'rips': rips,
     'time': time,
     'status': status,
     'detail': detail,
-    'familiar': familiar,
+    'relative': relative,
     'noupdate': true
 });
 
@@ -26,7 +26,7 @@ function populate_table(data) {
                     <div class="detail">${patient['detail']}</div>
                 </div>
                 <div>
-                    <div class="familiar" onclick="update_status({rips: ${patient['rips']}, status: '${patient['status']}', time: '${patient['time']}', familiar: !${patient['familiar']}});"></div>
+                    <div class="relative${patient['relative'] ? ' green' : ''}" onclick="update_status({rips: ${patient['rips']}, status: '${patient['status']}', time: '${patient['time']}', relative: !${patient['relative']}});"></div>
                     <div class="surgery${patient['status_index'] > 0 ? ' disabled' : ` " onclick="update_status({rips: ${patient['rips']}, status: 'surgery'});`}"></div>
                     <div class="pacu${patient['status_index'] > 1 ? ' disabled' : ` " onclick="update_status({rips: ${patient['rips']}, status: 'pacu'});`}"></div>
                     <div class="exit${patient['status_index'] > 2 ? ' disabled' : ` " onclick="update_status({rips: ${patient['rips']}, status: 'exit', time: '${patient['time']}', detail: '${patient['detail']}'});`}"></div>

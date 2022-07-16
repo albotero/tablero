@@ -116,8 +116,8 @@ $title-height: 125px;
                 content: 'Destino: ';
             }
 
-            &.--detail-familiar{
-                color: red;
+            &.--detail-relative{
+                color: rgb(255, 0, 0);
                 font-weight: bold;
                 &::before { content: 'Se requiere al familiar'; }
             }

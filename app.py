@@ -85,10 +85,10 @@ def filter_patients(data):
 def update_rips(data):
     filter = None if data.get('noupdate') else data['rips']
 
-    # Add familiar call
-    if data.get('familiar'):
+    # Add relative call
+    if data.get('relative'):
         DB_Table('board').update(
-            data={'`familiar` =': 1 if data['familiar'] else 0},
+            data={'`relative` =': 1 if data['relative'] else 0},
             conditions={'`rips` =': data['rips']},
             optional='ORDER BY `eventid` DESC LIMIT 1'
         )

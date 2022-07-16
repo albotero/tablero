@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS board (
   `time` timestamp,
   `status` text,
   `detail` text,
-  `familiar` boolean default false,
+  `relative` boolean default false,
   `user` int
 );
 

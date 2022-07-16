@@ -42,9 +42,12 @@
                 .surgery::before { @include icon('/static/svg/surgery.svg'); }
                 .pacu::before { @include icon('/static/svg/pacu.svg'); }
                 .exit::before { @include icon('/static/svg/exit.svg'); }
-                .familiar::before {
-                    @include icon('/static/svg/familiar.svg');
-                    filter: none;
+                .relative {
+                    &::before {
+                        @include icon('/static/svg/relative.svg');
+                        filter: none;
+                    }
+                    &.green { filter: hue-rotate(120deg) brightness(175%); }
                 }
 
                 div {
