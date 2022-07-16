@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS board (
   `rips` int,
   `time` timestamp,
   `status` text,
-  `detail` text,
+  `destination` text,
   `relative` boolean default false,
   `user` int
 );

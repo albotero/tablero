@@ -73,10 +73,10 @@
   width: 25px;
   height: 25px;
   filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
-  filter: none;
-}
-.summary > div:not(:first-child) > :nth-child(3) .relative.green {
   filter: hue-rotate(120deg) brightness(175%);
+}
+.summary > div:not(:first-child) > :nth-child(3) .relative.--relative-called::before {
+  filter: none;
 }
 .summary > div:not(:first-child) > :nth-child(3) div {
   user-select: none;
@@ -132,4 +132,23 @@
 .filter .clear:hover {
   background-color: rgb(223, 220, 220);
   border-color: rgb(168, 168, 168);
+}
+
+#destination {
+  font-size: 18px;
+}
+#destination h4 {
+  margin: 7px;
+}
+#destination p, #destination div {
+  margin: 0;
+}
+#destination div {
+  display: none;
+}
+#destination input {
+  font-family: Cambria;
+}
+#destination .active {
+  display: block;
 }

@@ -104,7 +104,7 @@ def update_rips(data):
         'rips': data['rips'],
         'time': data['time'] if data.get('time') else datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'status': data.get('status', default_status),
-        'detail': data.get('detail', ''),
+        'destination': data.get('destination', ''),
         'user': session['user']
     })
 

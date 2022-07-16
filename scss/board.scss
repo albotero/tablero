@@ -111,15 +111,16 @@ $title-height: 125px;
             margin: 0;
             line-height: 24px !important;
 
-            .--detail-destination::before {
-                font-weight: bold;
-                content: 'Destino: ';
-            }
-
             &.--detail-relative{
                 color: rgb(255, 0, 0);
                 font-weight: bold;
                 &::before { content: 'Se requiere al familiar'; }
+            }
+
+            .--detail-destination::before {
+                font-weight: bold;
+                content: 'Destino:';
+                margin-right: 4px;
             }
         }
 

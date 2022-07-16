@@ -45,9 +45,9 @@
                 .relative {
                     &::before {
                         @include icon('/static/svg/relative.svg');
-                        filter: none;
+                        filter: hue-rotate(120deg) brightness(175%);
                     }
-                    &.green { filter: hue-rotate(120deg) brightness(175%); }
+                    &.--relative-called::before { filter: none; }
                 }
 
                 div {
@@ -110,4 +110,14 @@
             border-color: rgb(168, 168, 168);
         }
     }
+}
+
+#destination {
+    font-size: 18px;
+
+    h4 { margin: 7px; }
+    p, div { margin: 0; }
+    div { display: none; }
+    input { font-family: Cambria; }
+    .active { display: block; }
 }
