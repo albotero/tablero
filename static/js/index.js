@@ -111,10 +111,12 @@ function populate_table(data) {
                     <div class="detail">${patient['destination']}</div>
                 </div>
                 <div>
-                    <div class="relative${patient['relative'] ? ' --relative-called' : ''}" onclick="update_status({rips: ${patient['rips']}, status: '${patient['status']}', destination: '${patient['destination']}', time: '${patient['time']}', relative: !${patient['relative']}});"></div>
-                    <div class="surgery${patient['status_index'] > 0 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'surgery'});`}"></div>
-                    <div class="pacu${patient['status_index'] > 1 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'pacu'});`}"></div>
-                    <div class="exit${patient['status_index'] > 2 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'exit'});`}"></div>
+                    <div class="tooltip relative${patient['relative'] ? ' --relative-called' : ''}" onclick="update_status({rips: ${patient['rips']}, status: '${patient['status']}', destination: '${patient['destination']}', time: '${patient['time']}', relative: !${patient['relative']}});">
+                        <div class="tooltiptext">${patient['relative'] ? 'Retirar llamado al familiar' : 'Llamar al familiar'}</div>
+                    </div>
+                    <div class="tooltip surgery${patient['status_index'] > 0 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'surgery'});`}"><div class="tooltiptext">Ingreso a Quirófano</div></div>
+                    <div class="tooltip pacu${patient['status_index'] > 1 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'pacu'});`}"><div class="tooltiptext">Recuperación</div></div>
+                    <div class="tooltip exit${patient['status_index'] > 2 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'exit'});`}"><div class="tooltiptext">Salida</div></div>
                 </div>
             </div>`;
         

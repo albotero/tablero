@@ -13,6 +13,8 @@ $color-surgery: rgb(251, 210, 233);
 $color-pacu: rgb(243, 233, 189);
 $color-exit: rgb(183, 255, 183);
 
+$color-tooltip: rgb(77, 89, 102);
+
 @mixin icon($img, $width: 25px, $height: $width) {
     content: '';
     margin: -1.3px 10px;

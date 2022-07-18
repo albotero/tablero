@@ -69,3 +69,38 @@ body {
         }
     }
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    //border-bottom: 1px dotted black;
+
+    .tooltiptext {
+        visibility: hidden;
+        background-color: $color-tooltip;
+        box-shadow: 0 1px 4px $color1;
+        color: $color1;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        width: 110px;
+        bottom: 150%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: $color-tooltip transparent transparent transparent;
+          }
+    }
+
+    &:hover .tooltiptext { visibility: visible; }
+}
