@@ -26,8 +26,8 @@ if (patientLocation) {
         let isOverflowing = container[0].clientHeight < container[0].scrollHeight;
         if (!isOverflowing) return;
 
-        $('#patients .patient:first').slideUp(1000, function() {
-            container.append($(this).show());
+        $('#patients .patient:last').slideUp(1000, function() {
+            container.prepend($(this).slideDown(1000));
         });
     }, 5000);
 
