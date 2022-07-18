@@ -19,7 +19,7 @@ if (patientLocation) {
 
     setInterval(function() {
         // Requests active patients
-        socket.emit('active-patients', patientLocation);
+        socket.emit('active-patients', {'location': patientLocation});
 
         // Only scrolls if content overflows
         var container = $('#patients');
@@ -32,10 +32,10 @@ if (patientLocation) {
     }, 5000);
 
     // Requests active patients
-    socket.emit('active-patients', patientLocation);
+    socket.emit('active-patients', {'location': patientLocation});
 }
 
-socket.on(`update-${patientLocation}`, function(data) {
+socket.on(`filtered-${patientLocation}`, function(data) {
     data = JSON.parse(data);
     let activePatients = [];
 

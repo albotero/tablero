@@ -21,7 +21,7 @@
             <div class="input-group filter">
                 <input type="text" placeholder="-" id="filter">
                 <label for="filter">RIPS</label>
-                <div class="clear" onclick="$('#filter').val(''); socket.emit('filter-patients', [patientLocation, null]);">
+                <div class="clear" onclick="clear_filter();">
                     <div>&#x274C;</div>
                 </div>
             </div>

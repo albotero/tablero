@@ -16,7 +16,7 @@ class ActivePatients:
         }
     }
 
-    def __init__(self, location, filter = None):
+    def __init__(self, location, filter):
         time_30min = (datetime.now() - timedelta(hours=0, minutes=30)).strftime('%Y-%m-%d %H:%M:%S')
         query = f'''
             SELECT *
@@ -29,8 +29,10 @@ class ActivePatients:
             ON last_updates.id = board.eventid
             WHERE
                 `location`='{location}'
-                AND `status`!='exit'
-                OR (`status`='exit' AND `time` >='{time_30min}')
+                AND (
+                    `status`!='exit'
+                    OR (`status`='exit' AND `time` >='{time_30min}')
+                )
                 {f"AND `rips`='{filter}'" if filter else ""}
             ORDER BY `time` DESC;
             '''

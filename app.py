@@ -59,32 +59,16 @@ def board(location):
         ActivePatients = ActivePatients)
 
 @socketio.on('active-patients')
-def active_patients(location):
+def active_patients(data):
     try:
-        # Emits active patients to render in board
-        emit(f'update-{location}', str(ActivePatients(location)))
-    except Exception as ex:
-        # Log error
-        pass
-
-@socketio.on('filter-patients')
-def filter_patients(data):
-    try:
-        # If no patient is filtered, return all active patients
-        if not data[1]:
-            active_patients(data[0])
-            return
-        
         # Return filtered patients
-        emit(f"filtered-{data[0]}", str(ActivePatients(location=data[0], filter=data[1])))
+        emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=data.get('filter'))))
     except Exception as ex:
         # Log error
         pass
 
 @socketio.on('update-rips')
 def update_rips(data):
-    filter = data.get('filter')
-
     # Add relative call
     if data.get('relative'):
         DB_Table('board').update(
@@ -92,7 +76,7 @@ def update_rips(data):
             conditions={'`rips` =': data['rips']},
             optional='ORDER BY `eventid` DESC LIMIT 1'
         )
-        emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=filter)))
+        emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=data.get('filter'))))
         return
 
     # Default status for new patients
@@ -109,7 +93,7 @@ def update_rips(data):
     })
 
     # Update changes on Board
-    emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=filter)))
+    emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=data.get('filter'))))
 
 @app.route('/admin')
 def admin():

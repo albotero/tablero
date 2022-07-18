@@ -35,7 +35,7 @@
   background-color: rgb(255, 255, 255);
 }
 .summary > div:not(:first-child).updated-patient {
-  animation: update-patient 1.5s ease-out running;
+  animation: update-patient 2.5s ease-out running;
 }
 .summary > div:not(:first-child):first-child {
   font-weight: bold;

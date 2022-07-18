@@ -40,6 +40,11 @@ function format_destination_hosp(element) {
 
 var updated_patient = null;
 
+function clear_filter() {
+    $('#filter').val('');
+    socket.emit('active-patients', {'location': patientLocation});
+}
+
 function update_status({ rips, status, destination = '', relative = false, time = null }) {
     var data = {
         'location': patientLocation,
@@ -130,21 +135,20 @@ function populate_table(data) {
             'Ingresar', 'Cancelar',
             () => {
                 updated_patient = rips;
-                socket.emit('update-rips', { 'location': patientLocation, 'rips': rips });
+                socket.emit('update-rips', { 'location': patientLocation, 'rips': rips, 'filter': $('#filter').val() });
             });
     }
 }
 
-socket.on(`update-${patientLocation}`, (data) => populate_table(data));
-socket.on(`filtered-${patientLocation}`, (data) => populate_table(data));
-
 // Requests filtered patients
-socket.emit('filter-patients', [patientLocation, $('#filter').val()]);
+socket.emit('active-patients', {'location': patientLocation, 'filter': $('#filter').val()});
 
 // Filter RIPS when Enter key is pressed
 $(document).on('keypress', '#filter', (e) => {
     if (e.keyCode == 13 || e.which == '13') {
         // Requests filtered patients
-        socket.emit('filter-patients', [patientLocation, $('#filter').val()] );
+        socket.emit('active-patients', {'location': patientLocation, 'filter': $('#filter').val()} );
     }
 });
+
+socket.on(`filtered-${patientLocation}`, (data) => populate_table(data));

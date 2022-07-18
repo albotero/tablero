@@ -37,8 +37,8 @@
         // Rows
         &:not(:first-child){
             background-color: $color1;
-            
-            &.updated-patient { animation: update-patient 1.5s ease-out running; }
+
+            &.updated-patient { animation: update-patient 2.5s ease-out running; }
 
             // RIPS
             &:first-child { font-weight: bold; }
