@@ -4,6 +4,11 @@
     width: min(750px, 70%);
 }
 
+@keyframes update-patient {
+    0%, 100% { background-color: $color1; }
+    35%, 50% { background-color: rgb(139, 227, 117); }
+}
+
 .summary {
     width: 600px;
     font-size: large;
@@ -31,6 +36,10 @@
 
         // Rows
         &:not(:first-child){
+            background-color: $color1;
+            
+            &.updated-patient { animation: update-patient 1.5s ease-out running; }
+
             // RIPS
             &:first-child { font-weight: bold; }
 

@@ -38,6 +38,8 @@ function format_destination_hosp(element) {
     $(active).children('input[name="--destination-detail"]').val(detail);
 }
 
+var updated_patient = null;
+
 function update_status({ rips, status, destination = '', relative = false, time = null }) {
     var data = {
         'location': patientLocation,
@@ -46,7 +48,7 @@ function update_status({ rips, status, destination = '', relative = false, time 
         'status': status,
         'destination': destination,
         'relative': relative,
-        'noupdate': true
+        'filter': $('#filter').val()
     };
     
     if (status == 'exit' && !destination) {
@@ -78,10 +80,12 @@ function update_status({ rips, status, destination = '', relative = false, time 
             <script type="text/javascript">$('input[name="--destination"]')[0].click();</script>`,
             'Egresar', 'Cancelar',
             () => {
+                updated_patient = rips;
                 data['destination'] = $('.active input[name="--destination-detail"]').val();
                 return socket.emit('update-rips', data);
             });
     } else {
+        updated_patient = rips;
         return socket.emit('update-rips', data);
     }
 }
@@ -95,7 +99,7 @@ function populate_table(data) {
     for (let patient of JSON.parse(data)) {
         activePatients.push(patient['rips']);
         let html = `
-            <div>
+            <div${updated_patient == patient['rips'] ? ' class="updated-patient"' : ''}>
                 <div>${patient['rips']}</div>
                 <div>
                     <div class="detail">${patient['time_str']} &#10137; ${patient['status_str']}</div>
@@ -111,6 +115,7 @@ function populate_table(data) {
         
         $('.summary').append(html);
     }
+    updated_patient = null;
 
     // If the RIPS provided is not found, asks for registration
     let rips = parseInt($('#filter').val());
@@ -123,7 +128,10 @@ function populate_table(data) {
             </p>
             <p>¿Desea ingresarlo ahora?</p>`,
             'Ingresar', 'Cancelar',
-            () => socket.emit('update-rips', { 'location': patientLocation, 'rips': rips }));
+            () => {
+                updated_patient = rips;
+                socket.emit('update-rips', { 'location': patientLocation, 'rips': rips });
+            });
     }
 }
 

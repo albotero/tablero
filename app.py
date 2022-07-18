@@ -83,7 +83,7 @@ def filter_patients(data):
 
 @socketio.on('update-rips')
 def update_rips(data):
-    filter = None if data.get('noupdate') else data['rips']
+    filter = data.get('filter')
 
     # Add relative call
     if data.get('relative'):

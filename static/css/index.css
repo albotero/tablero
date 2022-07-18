@@ -2,6 +2,14 @@
   width: min(750px, 70%);
 }
 
+@keyframes update-patient {
+  0%, 100% {
+    background-color: rgb(255, 255, 255);
+  }
+  35%, 50% {
+    background-color: rgb(139, 227, 117);
+  }
+}
 .summary {
   width: 600px;
   font-size: large;
@@ -22,6 +30,12 @@
   font-weight: bold;
   color: rgb(255, 255, 255);
   background-color: rgb(67, 90, 134);
+}
+.summary > div:not(:first-child) {
+  background-color: rgb(255, 255, 255);
+}
+.summary > div:not(:first-child).updated-patient {
+  animation: update-patient 1.5s ease-out running;
 }
 .summary > div:not(:first-child):first-child {
   font-weight: bold;
