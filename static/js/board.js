@@ -47,8 +47,9 @@ socket.on(`update-${patientLocation}`, function(data) {
             <div class="--patient-rips">${patient['rips']}</div>
             <div class="--patient-time">${patient['time_str']}</div>
             <div class="--patient-status">${patient['status_str']}</div>
-            <div class="--patient-detail ${patient['relative'] ? '--detail-relative' : ''}">                
-                ${patient['destination'] ? `<div class="--detail-destination"></div>${patient['destination']}` : ''}
+            <div class="--patient-detail">
+                ${patient['relative'] ? '<div class="--detail-relative"></div>' : ''}                
+                ${patient['destination'] ? `<div class="--detail-destination">${patient['destination']}</div>` : ''}
             </div>`;
         
         let item = `#patient-${patient['rips']}`;

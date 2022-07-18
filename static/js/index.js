@@ -38,18 +38,18 @@ function format_destination_hosp(element) {
     $(active).children('input[name="--destination-detail"]').val(detail);
 }
 
-function update_status({ rips, status, relative = false, time = null }) {
+function update_status({ rips, status, destination = '', relative = false, time = null }) {
     var data = {
         'location': patientLocation,
         'rips': rips,
         'time': time,
         'status': status,
-        'destination': '',
+        'destination': destination,
         'relative': relative,
         'noupdate': true
     };
     
-    if (status == 'exit') {
+    if (status == 'exit' && !destination) {
         $.confirm('Egresar Paciente',
             `<form id="destination">
                 <h4>Destino del paciente:</h4>
@@ -102,7 +102,7 @@ function populate_table(data) {
                     <div class="detail">${patient['destination']}</div>
                 </div>
                 <div>
-                    <div class="relative${patient['relative'] ? ' --relative-called' : ''}" onclick="update_status({rips: ${patient['rips']}, status: '${patient['status']}', time: '${patient['time']}', relative: !${patient['relative']}});"></div>
+                    <div class="relative${patient['relative'] ? ' --relative-called' : ''}" onclick="update_status({rips: ${patient['rips']}, status: '${patient['status']}', destination: '${patient['destination']}', time: '${patient['time']}', relative: !${patient['relative']}});"></div>
                     <div class="surgery${patient['status_index'] > 0 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'surgery'});`}"></div>
                     <div class="pacu${patient['status_index'] > 1 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'pacu'});`}"></div>
                     <div class="exit${patient['status_index'] > 2 ? ' disabled' : `" onclick="update_status({rips: ${patient['rips']}, status: 'exit'});`}"></div>

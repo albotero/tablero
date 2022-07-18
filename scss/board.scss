@@ -78,7 +78,7 @@ $title-height: 125px;
 
         margin: 5px 10px;
 
-        div {
+        > div {
             margin: -22.5px 0;
             display: flex;
             justify-content: center;
@@ -110,11 +110,12 @@ $title-height: 125px;
             font: 18px Georgia, sans;
             margin: 0;
             line-height: 24px !important;
+            flex-direction: column;
 
-            &.--detail-relative{
+            .--detail-relative::before {
                 color: rgb(255, 0, 0);
                 font-weight: bold;
-                &::before { content: 'Se requiere al familiar'; }
+                content: 'Se requiere al familiar';
             }
 
             .--detail-destination::before {

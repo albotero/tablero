@@ -67,7 +67,7 @@
   box-shadow: 4px 3px 10px rgb(67, 90, 134);
   margin: 5px 10px;
 }
-#patients .patient div {
+#patients .patient > div {
   margin: -22.5px 0;
   display: flex;
   justify-content: center;
@@ -104,12 +104,11 @@
   font: 18px Georgia, sans;
   margin: 0;
   line-height: 24px !important;
+  flex-direction: column;
 }
-#patients .patient .--patient-detail.--detail-relative {
+#patients .patient .--patient-detail .--detail-relative::before {
   color: rgb(255, 0, 0);
   font-weight: bold;
-}
-#patients .patient .--patient-detail.--detail-relative::before {
   content: "Se requiere al familiar";
 }
 #patients .patient .--patient-detail .--detail-destination::before {
