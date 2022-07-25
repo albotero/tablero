@@ -28,20 +28,7 @@ body {
   margin: -7px auto;
 }
 
-.locations {
-  width: min(750px, 70%);
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 50px 30px;
-  background-color: rgb(255, 255, 255);
-  display: grid;
-  justify-content: center;
-  gap: 50px 100px;
-  user-select: none;
-}
-.locations div {
+.button {
   width: 150px;
   height: 30px;
   line-height: 30px;
@@ -51,12 +38,12 @@ body {
   border: 1px solid rgb(67, 90, 134);
   border-radius: 10px;
 }
-.locations div:hover {
+.button:hover {
   background-color: rgb(186, 186, 195);
   cursor: pointer;
   border-color: rgb(22, 34, 85);
 }
-.locations div:active {
+.button:active {
   background-color: rgb(67, 90, 134);
   color: rgb(255, 255, 255);
   border-color: rgb(186, 186, 195);
@@ -91,6 +78,6 @@ body {
   border-style: solid;
   border-color: rgb(77, 89, 102) transparent transparent transparent;
 }
-.tooltip:hover .tooltiptext {
+.tooltip:not(.disabled):hover .tooltiptext {
   visibility: visible;
 }

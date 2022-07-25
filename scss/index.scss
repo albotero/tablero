@@ -2,6 +2,55 @@
 
 .box {
     width: min(750px, 70%);
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 50px 30px;
+    background-color: $color1;
+    display: grid;
+    justify-content: center;
+    gap: 50px 100px;
+    user-select: none;
+}
+
+.location {
+    width: 75%;
+    display: grid;
+    grid-template-columns: auto 20px auto auto;
+    grid-auto-rows: min-content;
+    grid-template-areas: "location border button button";
+    margin: 5px 10px;
+
+    h2 {
+        grid-area: "location";
+        text-align: left;
+        margin: 0 10px;
+    }
+
+    div:nth-child(2) {
+        grid-area: "border";
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            background-color: $color4;
+            left: calc(50% - 1px);
+            right: calc(50% - 1px);
+            top: 0;
+            bottom: 0;
+        }
+    }
+    
+    div:nth-child(n+3) {
+        grid-area: "button";
+        margin: 0 10px;
+        width: max-content;
+        height: 15px;
+        line-height: 15px;
+    }
 }
 
 @keyframes update-patient {

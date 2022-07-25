@@ -9,10 +9,15 @@
 
 {% block content %}
     {% if not location in ActivePatients.locations.keys() %}
-        <div class="box locations">
+        <div class="box">
             <h2>Elegir Servicio</h2>
             {% for key, vals in ActivePatients.locations.items() %}
-                <div onclick="window.location = `{{ url_for('.index', location = key) }}`;">{{ vals['title'] }}</div>
+                <div class="location">
+                    <h2>{{ vals['title'] }}</h2>
+                    <div></div>
+                    <div class="button" onclick="window.location = `{{ url_for('.index', location = key) }}`;">Pacientes ingresados</div>
+                    <div class="button" onclick="window.location = `{{ url_for('.board', location = key) }}`;">Sala de espera</div>
+                </div>
             {% endfor %}
         </div>
     {% else %}

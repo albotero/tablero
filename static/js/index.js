@@ -74,12 +74,12 @@ function update_status({ rips, status, destination = '', relative = false, time 
                         ${populate_destination_hosp()}
                     </select>
                     <h4>Cama:</h4>
-                    <input type="text" name="--room" onchange="format_destination_hosp(this);" ${change}>
+                    <input type="text" name="--room" autocomplete="off" onchange="format_destination_hosp(this);" ${change}>
                     <input type="hidden" name="--destination-detail" value="">
                 </div>
                 <div class="--other-options">
                     <h4>Detalle:</h4>
-                    <input type="text" name="--destination-detail">
+                    <input type="text" name="--destination-detail" autocomplete="off">
                 </div>
             </form>
             <script type="text/javascript">$('input[name="--destination"]')[0].click();</script>`,
