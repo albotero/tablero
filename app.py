@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from operator import methodcaller
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_socketio import SocketIO, emit
 
@@ -8,6 +9,7 @@ from scripts.database import DB_Table
 
 from datetime import datetime
 
+from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__, instance_relative_config = True)
@@ -100,6 +102,14 @@ def update_rips(data):
 @app.route('/comm-manager')
 def comm_manager():
     return render_template('comm-manager.html')
+
+@app.route('/upload-video', methods=['POST'])
+def upload_video():
+    file = request.files.get('video')
+    if file:
+        index = len(os.listdir('static/comm')) + 1
+        file.save(os.path.join('static/comm', f'{index}-{secure_filename(file.filename)}'))
+    return redirect(url_for('.comm_manager'))
 
 @socketio.on('get-comm-videos')
 def comm_videos():

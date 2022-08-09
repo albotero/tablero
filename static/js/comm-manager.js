@@ -8,7 +8,10 @@ socket.on('comm-videos', (data) => {
 
         // Add videos
         data.forEach(video => {
-            let index = data.indexOf(video) + 1;
+            const regexp = /^.*[\\\/](\d+)-(.+)/g;
+            const matches = regexp.exec(video);
+
+            let index = matches[1], filename = matches[2];
             let actions = '';
             
             if (index > 1) {
@@ -31,7 +34,7 @@ socket.on('comm-videos', (data) => {
             let html = `
                 <div>
                     <div>${index}</div>
-                    <div>${video.replace(/^.*[\\\/]/, '')}</div>
+                    <div>${filename}</div>
                     <div>${actions} </div>
                 </div>`;
             
@@ -44,3 +47,21 @@ socket.on('comm-videos', (data) => {
 });
 
 setInterval(() => socket.emit('get-comm-videos'), 1000);
+
+function uploadVideo() {
+    $.confirm('Subir video',
+        `<form id="uploadvideo" action="/upload-video" method="post" enctype="multipart/form-data">
+            <input
+                type="file" name="video"
+                accept="video/mp4,video/x-m4v,video/*"
+                autocomplete="off"
+                required>
+        </form>`,
+        'Subir', 'Cancelar',
+        () => {
+            if ($('#uploadvideo')[0].reportValidity()) {
+                $('#uploadvideo').submit()
+            }
+        },
+        false);
+}

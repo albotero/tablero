@@ -23,4 +23,4 @@ socket.on('comm-videos', (data) => {
     }
 });
 
-$('video#comm').on('ended', () => playNext());
+$('video#comm').on('ended', playNext);

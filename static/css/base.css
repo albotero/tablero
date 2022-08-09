@@ -30,8 +30,9 @@ body {
 
 .button {
   width: 150px;
-  height: 30px;
-  line-height: 30px;
+  height: 27px;
+  margin: 0 auto;
+  line-height: 27px;
   text-align: center;
   background-color: rgb(226, 226, 237);
   padding: 10px 20px;
