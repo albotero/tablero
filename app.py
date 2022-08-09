@@ -97,6 +97,10 @@ def update_rips(data):
     # Update changes on Board
     emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=data.get('filter'))))
 
+@app.route('/comm-manager')
+def comm_manager():
+    return render_template('comm-manager.html')
+
 @socketio.on('get-comm-videos')
 def comm_videos():
     try:

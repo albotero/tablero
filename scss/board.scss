@@ -14,7 +14,7 @@ $title-height: 125px;
     user-select: none;
 
     display: grid;
-    grid-template-columns: 30% 15% auto 200px;
+    grid-template-columns: 25% 15% auto 200px;
     grid-template-rows: 125px 10px auto;
     grid-template-areas:
         "icon title title time"

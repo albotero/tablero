@@ -107,6 +107,12 @@
                     }
                     &.--relative-called::before { filter: none; }
                 }
+                .up::before { @include icon('/static/svg/up.svg'); }
+                .down::before { @include icon('/static/svg/down.svg'); }
+                .delete::before {
+                    @include icon('/static/svg/delete.svg');
+                    filter: none;
+                }
 
                 div {
                     user-select: none;
