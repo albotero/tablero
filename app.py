@@ -8,6 +8,8 @@ from scripts.database import DB_Table
 
 from datetime import datetime
 
+import os
+
 app = Flask(__name__, instance_relative_config = True)
 app.secret_key = 'tablero'
 
@@ -98,10 +100,9 @@ def update_rips(data):
 @socketio.on('get-comm-videos')
 def comm_videos():
     try:
-        # Return list of videos
-        emit(f"comm-videos", 
-            ['http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'])
+        # Return list of videos in static/comm
+        videos = [ url_for('static', filename=f'comm/{video}') for video in os.listdir('static/comm') ]
+        emit(f"comm-videos", videos)
     except Exception as ex:
         # Log error
         pass
