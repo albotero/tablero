@@ -1,41 +1,37 @@
 var socket = io();
 
-if (patientLocation) {
+setInterval(() => {
+    const time = new Date();
+    let h = time.getHours() % 12;
+    h = h == 0 ? 12 : h;
+    let m = time.getMinutes();
+    m = (m < 10 ? '0': '') + m;
+    let s = time.getSeconds();
+    s = (s < 10 ? '0': '') + s;
+    let t = time.getHours() >= 12 ? 'pm' : 'am';
 
-    setInterval(function() {
-        const time = new Date();
-        let h = time.getHours() % 12;
-        h = h == 0 ? 12 : h;
-        let m = time.getMinutes();
-        m = (m < 10 ? '0': '') + m;
-        let s = time.getSeconds();
-        s = (s < 10 ? '0': '') + s;
-        let t = time.getHours() >= 12 ? 'pm' : 'am';
+    // Update clock
+    const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+    $('.time').html(`${h}:${m} ${t}<br/>${time.getDate()} ${months[time.getMonth()]}. ${time.getFullYear()}`);
+}, 1000);
 
-        // Update clock
-        const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-        $('.time').html(`${h}:${m}:${s} ${t}<br/>${time.getDate()} ${months[time.getMonth()]}. ${time.getFullYear()}`);
-    }, 500);
-
-    setInterval(function() {
-        // Requests active patients
-        socket.emit('active-patients', {'location': patientLocation});
-
-        // Only scrolls if content overflows
-        var container = $('#patients');
-        let isOverflowing = container[0].clientHeight < container[0].scrollHeight;
-        if (!isOverflowing) return;
-
-        $('#patients .patient:last').slideUp(500, function() {
-            container.prepend($(this).slideDown(1000));
-        });
-    }, 5000);
-
+setInterval(() => {
     // Requests active patients
-    socket.emit('active-patients', {'location': patientLocation});
-}
+    socket.emit('active-patients', { 'location': patientLocation });
 
-socket.on(`filtered-${patientLocation}`, function(data) {
+    // Only scrolls if content overflows
+    var container = $('#patients');
+    let isOverflowing = container[0].clientHeight < container[0].scrollHeight;
+    if (!isOverflowing)
+        return;
+
+    $('#patients .patient:last').slideUp(500, () => container.prepend($(this).slideDown(1000)) );
+}, 5000);
+
+// Requests active patients
+socket.emit('active-patients', {'location': patientLocation});
+
+socket.on(`filtered-${patientLocation}`, (data) => {
     data = JSON.parse(data);
     let activePatients = [];
 
@@ -51,16 +47,16 @@ socket.on(`filtered-${patientLocation}`, function(data) {
                 ${patient['relative'] ? '<div class="--detail-relative"></div>' : ''}                
                 ${patient['destination'] ? `<div class="--detail-destination">${patient['destination']}</div>` : ''}
             </div>`;
-        
+
         let item = `#patient-${patient['rips']}`;
+
         if ($(item).length) {
             // If patient already exists, updates its data
             if ($(item).html() != html) {
-                $(item).slideUp(1000, () =>
-                    $(item).html(html)
-                        .attr('class', `patient --${patient['status']}`)
-                        .prependTo('#patients')
-                        .slideDown(1000)
+                $(item).slideUp(1000, () => $(item).html(html)
+                    .attr('class', `patient --${patient['status']}`)
+                    .prependTo('#patients')
+                    .slideDown(1000)
                 );
             }
         } else {

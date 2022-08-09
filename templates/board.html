@@ -11,7 +11,20 @@
       <div class="icon"></div>
       <div class="title">{{ ActivePatients.locations[location]['title'] }}</div>
       <div class="time"></div>
-      <div class="videos">Publicidad CV</div>
+      <div class="videos">
+        <div class="--tv">
+          <div class="--tv-antenna --tv-antenna-left"></div>
+          <div class="--tv-antenna --tv-antenna-right"></div>
+          <div class="--tv-base --tv-base-left"></div>
+          <div class="--tv-base --tv-base-right"></div>
+          <div class="--tv-outer">
+            <div class="--tv-inner">
+              <video id="comm" autoplay>
+              <script src="{{ url_for('static', filename='js/comm.js') }}"></script>
+            </div>
+          </div>
+        </div>
+      </div>
       <div id="patients"></div>
     </div>
 {% endblock %}

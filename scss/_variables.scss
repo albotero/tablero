@@ -26,3 +26,10 @@ $color-tooltip: rgb(77, 89, 102);
     height: $height;
     filter: invert(10%) sepia(49%) saturate(3175%) hue-rotate(220deg) brightness(95%) contrast(96%);
 }
+
+@mixin center-element() {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

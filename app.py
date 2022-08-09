@@ -95,6 +95,17 @@ def update_rips(data):
     # Update changes on Board
     emit(f"filtered-{data['location']}", str(ActivePatients(location=data['location'], filter=data.get('filter'))))
 
+@socketio.on('get-comm-videos')
+def comm_videos():
+    try:
+        # Return list of videos
+        emit(f"comm-videos", 
+            ['http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4'])
+    except Exception as ex:
+        # Log error
+        pass
+
 @app.route('/admin')
 def admin():
     # Requires admin user
